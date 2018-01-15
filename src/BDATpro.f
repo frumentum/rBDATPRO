@@ -291,7 +291,7 @@ c			 BDATNullStellenFkt
 c			
 c		
 c						
-c			 CDFNORM (NUM)	CDFNORMInv (NUM)	
+! c			 CDFNORM (NUM)	CDFNORMInv (NUM)	
 c	
 c	----------------------------------------------------------------------------------------
 c
@@ -2892,397 +2892,397 @@ c	------------------------------------------------------------------------------
 	end subroutine BDATMwQ03BWI
 
 
-c	****************************************************************************************
-	subroutine xBDATMwQ03BWI(BDATBArtNr,D,H,Q03Pct,
-	1						MwQ03BWI,StDevQ03BWI,MwQ03BWIPct)
-c	****************************************************************************************
+! c	****************************************************************************************
+	! subroutine xBDATMwQ03BWI(BDATBArtNr,D,H,Q03Pct,
+	! 1						MwQ03BWI,StDevQ03BWI,MwQ03BWIPct)
+! c	****************************************************************************************
 
-c		q0.3 - Percentile = MwQ03BWIPct = F(D,H,PctlWert) / MW / STD = F(D,H)
-c
-c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
-c 		D			REAL*4	EIN	- BHD [cm]
-c		H			REAL*4	EIN	- BaumHöhe [m] 
-c		Q03Pct		REAL*4	EIN	- PercentilWert (eps,1-eps) für MwQ03BWIPct Schätzung
-c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (geschätzt)
-c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
-c		MwQ03BWIPct REAL*4	AUS - Mittlerer q0.3 - Percentilwert (geschätzt)
+! c		q0.3 - Percentile = MwQ03BWIPct = F(D,H,PctlWert) / MW / STD = F(D,H)
+! c
+! c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
+! c 		D			REAL*4	EIN	- BHD [cm]
+! c		H			REAL*4	EIN	- BaumHöhe [m] 
+! c		Q03Pct		REAL*4	EIN	- PercentilWert (eps,1-eps) für MwQ03BWIPct Schätzung
+! c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (geschätzt)
+! c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
+! c		MwQ03BWIPct REAL*4	AUS - Mittlerer q0.3 - Percentilwert (geschätzt)
 
-c	****************************************************************************************
+! c	****************************************************************************************
 
-		Integer*2	BDATBArtNr 
-		Real*4		D, H, Q03Pct
-		Real*4		MwQ03BWI,StDevQ03BWI, MwQ03BWIPct
+		! Integer*2	BDATBArtNr 
+		! Real*4		D, H, Q03Pct
+		! Real*4		MwQ03BWI,StDevQ03BWI, MwQ03BWIPct
 	
-		real*4		EQP(1:8,1:2,1:7)
-		real*4		SQP(1:8,1:6)
+		! real*4		EQP(1:8,1:2,1:7)
+		! real*4		SQP(1:8,1:6)
 	
-		Integer*2	BDATSKNrList(1:36)
+		! Integer*2	BDATSKNrList(1:36)
 
-		Integer*2	BDATSKNr
+		! Integer*2	BDATSKNr
 
-		Real*4		Q
-		Real*4		Q1, Q2, Q3, sQ1, sQ2, sQ3
-		Real*4		EQ03,StDevQ03 
+		! Real*4		Q
+		! Real*4		Q1, Q2, Q3, sQ1, sQ2, sQ3
+		! Real*4		EQ03,StDevQ03 
 
-		Real*4		EQ03uG /0.4000/
-		Real*4		EQ03oG /0.9800/   
+		! Real*4		EQ03uG /0.4000/
+		! Real*4		EQ03oG /0.9800/   
 
-		Real*4		a11, a12, a13, h11,	h12, H13, D1   
-		Real*4		a21, a22, a23, h21,	h22, H23, D2
+		! Real*4		a11, a12, a13, h11,	h12, H13, D1   
+		! Real*4		a21, a22, a23, h21,	h22, H23, D2
     
-		Real*4		Phi
+		! Real*4		Phi
 
-		Real*4		Z1, Z2
+		! Real*4		Z1, Z2
 
-		Real*4		CDFx, x
+		! Real*4		CDFx, x
 
-		Real*4		eps /0.001/
+		! Real*4		eps /0.001/
 	 
-c	----------------------------------------------------------------------------------------
+! c	----------------------------------------------------------------------------------------
 	
-		data BDATSKNrList							/
-	1	1,  1,  2,  2,  4,  4,  4,  3,  5,  5,
-     2	5,  1,  1,  1,  6,  6,  7,  8,  8,  8,
-     3	6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
-     4	6,  6,  7,  6,  6,  6						/
+		! data BDATSKNrList							/
+	! 1	1,  1,  2,  2,  4,  4,  4,  3,  5,  5,
+     ! 2	5,  1,  1,  1,  6,  6,  7,  8,  8,  8,
+     ! 3	6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
+     ! 4	6,  6,  7,  6,  6,  6						/
 
-c	-------------------------------- Stand 23.08.01 ----------------------------------------	
+! c	-------------------------------- Stand 23.08.01 ----------------------------------------	
 
-		data (((EQP(i,j,k),k=1,7),j=1,2),i=1,8)		/
-     1 	20,	10,	50,	0.650,	0.875,	0.850,	0.250,
-	1	55,	10,	50,	0.525,	0.860,	0.775,	0.000,
-     2	20,	10,	50,	0.750,	0.950,	0.860,	0.500,
-	2	70,	10,	50,	0.670,	0.875,	0.780,	0.000,
-     3	20,	10,	50,	0.650,	0.925,	0.860,	0.300,
-	3	70,	10,	50,	0.500,	0.825,	0.700,	0.000,
-	4	20,	10,	50,	0.700,	0.800,	0.770,	0.250,
-	4	50,	10,	50,	0.700,	0.790,	0.770,	0.000,
-	5	20,	10,	50,	0.725,	0.950,	0.875,	0.500,
-	5	60,	10,	50,	0.630,	0.875,	0.750,	0.000,
-	6	20,	10,	50,	0.700,	0.900,	0.830,	0.750,
-	6	60,	10,	50,	0.650,	0.870,	0.820,	0.000,
-	7	20,	10,	50,	0.700,	0.850,	0.840,	0.750,
-	7	60,	10,	50,	0.675,	0.840,	0.825,	0.000,
-	8	20,	10,	50,	0.775,	0.850,	0.810,	1.000,
-	8	60,	10,	50,	0.725,	0.800,	0.760,	0.000	/
+		! data (((EQP(i,j,k),k=1,7),j=1,2),i=1,8)		/
+     ! 1 	20,	10,	50,	0.650,	0.875,	0.850,	0.250,
+	! 1	55,	10,	50,	0.525,	0.860,	0.775,	0.000,
+     ! 2	20,	10,	50,	0.750,	0.950,	0.860,	0.500,
+	! 2	70,	10,	50,	0.670,	0.875,	0.780,	0.000,
+     ! 3	20,	10,	50,	0.650,	0.925,	0.860,	0.300,
+	! 3	70,	10,	50,	0.500,	0.825,	0.700,	0.000,
+	! 4	20,	10,	50,	0.700,	0.800,	0.770,	0.250,
+	! 4	50,	10,	50,	0.700,	0.790,	0.770,	0.000,
+	! 5	20,	10,	50,	0.725,	0.950,	0.875,	0.500,
+	! 5	60,	10,	50,	0.630,	0.875,	0.750,	0.000,
+	! 6	20,	10,	50,	0.700,	0.900,	0.830,	0.750,
+	! 6	60,	10,	50,	0.650,	0.870,	0.820,	0.000,
+	! 7	20,	10,	50,	0.700,	0.850,	0.840,	0.750,
+	! 7	60,	10,	50,	0.675,	0.840,	0.825,	0.000,
+	! 8	20,	10,	50,	0.775,	0.850,	0.810,	1.000,
+	! 8	60,	10,	50,	0.725,	0.800,	0.760,	0.000	/
 
-		data ((SQP(i,j),j=1,6),i=1,8)						/	
-	1 	0.50,	0.75,	1.00,	0.2500,	0.0700,	0.0000,
-	2	0.50,	0.75,	1.00,	0.2500,	0.0800,	0.0000,
-	3	0.50,	0.75,	1.00,	0.2500,	0.0600,	0.0000,
-	4	0.50,	0.75,	1.00,	0.3000,	0.0550,	0.0000,
-	5	0.50,	0.75,	1.00,	0.2000,	0.0600,	0.0000,
-	6	0.50,	0.75,	1.00,	0.3000,	0.0900,	0.0000,
-	7	0.50,	0.80,	1.00,	0.2500,	0.0700,	0.0000,
-	8	0.50,	0.80,	1.00,	0.0300,	0.0300,	0.0300  /
+		! data ((SQP(i,j),j=1,6),i=1,8)						/	
+	! 1 	0.50,	0.75,	1.00,	0.2500,	0.0700,	0.0000,
+	! 2	0.50,	0.75,	1.00,	0.2500,	0.0800,	0.0000,
+	! 3	0.50,	0.75,	1.00,	0.2500,	0.0600,	0.0000,
+	! 4	0.50,	0.75,	1.00,	0.3000,	0.0550,	0.0000,
+	! 5	0.50,	0.75,	1.00,	0.2000,	0.0600,	0.0000,
+	! 6	0.50,	0.75,	1.00,	0.3000,	0.0900,	0.0000,
+	! 7	0.50,	0.80,	1.00,	0.2500,	0.0700,	0.0000,
+	! 8	0.50,	0.80,	1.00,	0.0300,	0.0300,	0.0300  /
 
-c	----------------------------------------------------------------------------------------
+! c	----------------------------------------------------------------------------------------
     
-		BDATSKNr = BDATSKNrList(BDATBArtNr)
+		! BDATSKNr = BDATSKNrList(BDATBArtNr)
 	
-		a11 = EQP(BDATSKNr, 1, 4)
-		a12 = EQP(BDATSKNr, 1, 5)
-		a13 = EQP(BDATSKNr, 1, 6)
+		! a11 = EQP(BDATSKNr, 1, 4)
+		! a12 = EQP(BDATSKNr, 1, 5)
+		! a13 = EQP(BDATSKNr, 1, 6)
     
-		h11 = EQP(BDATSKNr, 1, 2)
-		h12 = EQP(BDATSKNr, 1, 3)
-		H13 = (h12 + h11) * 0.5
+		! h11 = EQP(BDATSKNr, 1, 2)
+		! h12 = EQP(BDATSKNr, 1, 3)
+		! H13 = (h12 + h11) * 0.5
     
-		D1 = EQP(BDATSKNr, 1, 1)
+		! D1 = EQP(BDATSKNr, 1, 1)
     
-		a21 = EQP(BDATSKNr, 2, 4)
-		a22 = EQP(BDATSKNr, 2, 5)
-		a23 = EQP(BDATSKNr, 2, 6)
+		! a21 = EQP(BDATSKNr, 2, 4)
+		! a22 = EQP(BDATSKNr, 2, 5)
+		! a23 = EQP(BDATSKNr, 2, 6)
     
-		h21 = EQP(BDATSKNr, 2, 2)
-		h22 = EQP(BDATSKNr, 2, 3)
-		H23 = (h22 + h21) * 0.5
+		! h21 = EQP(BDATSKNr, 2, 2)
+		! h22 = EQP(BDATSKNr, 2, 3)
+		! H23 = (h22 + h21) * 0.5
     
-		D2 = EQP(BDATSKNr, 2, 1)
+		! D2 = EQP(BDATSKNr, 2, 1)
     
-		Phi = EQP(BDATSKNr, 1, 7)	
+		! Phi = EQP(BDATSKNr, 1, 7)	
     
-c     ****************************************************************************************
-c    	* Z(H|D(i)) = MW [Q0.3| H | a(H(i,j)|D(i))]; j=1,2,3; i=1,2                            *
-c	* Ratkowsky, D.A. (1990) (4.3.9), S97                                                  *
-c     ****************************************************************************************
+! c     ****************************************************************************************
+! c    	* Z(H|D(i)) = MW [Q0.3| H | a(H(i,j)|D(i))]; j=1,2,3; i=1,2                            *
+! c	* Ratkowsky, D.A. (1990) (4.3.9), S97                                                  *
+! c     ****************************************************************************************
             
-		Q1 = 2 * (H - h11) / (h12 - h11)
-		Z1 = a11 + (a12 - a11) * (1 - ((a12 - a13)/(a13 - a11))** Q1)
-	1	/ (1 - ((a12 - a13) / (a13 - a11)) ** 2)
+		! Q1 = 2 * (H - h11) / (h12 - h11)
+		! Z1 = a11 + (a12 - a11) * (1 - ((a12 - a13)/(a13 - a11))** Q1)
+	! 1	/ (1 - ((a12 - a13) / (a13 - a11)) ** 2)
     
-		Q2 = 2 * (H - h21) / (h22 - h21)
-		Z2 = a21 + (a22 - a21) * (1 - ((a22 - a23)/(a23 - a21)) ** Q2)
-	1	/ (1 - ((a22 - a23) / (a23 - a21)) ** 2)
+		! Q2 = 2 * (H - h21) / (h22 - h21)
+		! Z2 = a21 + (a22 - a21) * (1 - ((a22 - a23)/(a23 - a21)) ** Q2)
+	! 1	/ (1 - ((a22 - a23) / (a23 - a21)) ** 2)
                 
-c     ****************************************************************************************
-c     * EQ0.3(D,H) =  E [Q0.3| D, Z(H|D(i)); i=1,2] * Ratkowsky, D.A. (1990) (4.3.23), S104  *
-c     ****************************************************************************************
+! c     ****************************************************************************************
+! c     * EQ0.3(D,H) =  E [Q0.3| D, Z(H|D(i)); i=1,2] * Ratkowsky, D.A. (1990) (4.3.23), S104  *
+! c     ****************************************************************************************
             
-		EQ03 = Z1 * Z2 * (D2 ** Phi - D1 ** Phi)
-	1 /	(Z2 * (D2 ** Phi - D ** Phi) + Z1 * (D ** Phi - D1 ** Phi))
+		! EQ03 = Z1 * Z2 * (D2 ** Phi - D1 ** Phi)
+	! 1 /	(Z2 * (D2 ** Phi - D ** Phi) + Z1 * (D ** Phi - D1 ** Phi))
     
-		If (EQ03 < EQ03uG) Then
-			EQ03 = EQ03uG
-		End If
+		! If (EQ03 < EQ03uG) Then
+			! EQ03 = EQ03uG
+		! End If
 
-		If (EQ03 > EQ03oG) Then
-			EQ03 = EQ03oG
-		End If
+		! If (EQ03 > EQ03oG) Then
+			! EQ03 = EQ03oG
+		! End If
     
-c		***************
-		MwQ03BWI = EQ03
-c		***************
+! c		***************
+		! MwQ03BWI = EQ03
+! c		***************
 
-c     ****************************************************************************************
-c     * sQ0.3(D,H) =  s [Q0.3| D,sQ(Q|i)); i=1,3] * Ratkowsky, D.A. (1990) (4.3.29), S106    *
-c     ****************************************************************************************
+! c     ****************************************************************************************
+! c     * sQ0.3(D,H) =  s [Q0.3| D,sQ(Q|i)); i=1,3] * Ratkowsky, D.A. (1990) (4.3.29), S106    *
+! c     ****************************************************************************************
 
 
-c		Call BDATStDevQ03(BDATBArtNr, MwQ03, BDATSKNr, StDevQ03)      
+! c		Call BDATStDevQ03(BDATBArtNr, MwQ03, BDATSKNr, StDevQ03)      
                         
-		Q1 = SQP(BDATSKNr, 1)
-		Q2 = SQP(BDATSKNr, 2)
-		Q3 = SQP(BDATSKNr, 3)
+		! Q1 = SQP(BDATSKNr, 1)
+		! Q2 = SQP(BDATSKNr, 2)
+		! Q3 = SQP(BDATSKNr, 3)
     
-		sQ1 = SQP(BDATSKNr, 4)
-		sQ2 = SQP(BDATSKNr, 5)
-		sQ3 = SQP(BDATSKNr, 6)
+		! sQ1 = SQP(BDATSKNr, 4)
+		! sQ2 = SQP(BDATSKNr, 5)
+		! sQ3 = SQP(BDATSKNr, 6)
     
-		Q = EQ03
+		! Q = EQ03
          
-		if (ABS(sQ3-sQ1) < eps) then
-			StDevQ03 = sQ3
-		else	  	
-			StDevQ03 = (Q-Q3)*(Q2-Q1)*sQ1*sQ2 + (Q-Q2)*(Q1-Q3)*sQ1*sQ3
-	1		+ (Q-Q1)*(Q3-Q2)*sQ2*sQ3
+		! if (ABS(sQ3-sQ1) < eps) then
+			! StDevQ03 = sQ3
+		! else	  	
+			! StDevQ03 = (Q-Q3)*(Q2-Q1)*sQ1*sQ2 + (Q-Q2)*(Q1-Q3)*sQ1*sQ3
+	! 1		+ (Q-Q1)*(Q3-Q2)*sQ2*sQ3
 
-			StDevQ03 = StDevQ03/((Q-Q1)*(Q2-Q3)*sQ1 + (Q - Q2)*(Q3-Q1)
-	1		* sQ2 + (Q-Q3)*(Q1-Q2)*sQ3)
-		end if
+			! StDevQ03 = StDevQ03/((Q-Q1)*(Q2-Q3)*sQ1 + (Q - Q2)*(Q3-Q1)
+	! 1		* sQ2 + (Q-Q3)*(Q1-Q2)*sQ3)
+		! end if
 
-c		********************
-		StDevQ03BWI=StDevQ03
-c		********************
+! c		********************
+		! StDevQ03BWI=StDevQ03
+! c		********************
 
-		CDFx = Q03Pct
+		! CDFx = Q03Pct
 	
-		if (CDFx < eps) then
-			CDFx=0.5
-		end if
+		! if (CDFx < eps) then
+			! CDFx=0.5
+		! end if
 		 
-		if (CDFx > 1 - eps) then
-			CDFx=0.5
-		end if
+		! if (CDFx > 1 - eps) then
+			! CDFx=0.5
+		! end if
 	
-c		*****************************************
-		Call CDFNORMInv(EQ03, StDevQ03, CDFx, x)
-c		*****************************************
+! c		*****************************************
+		! Call CDFNORMInv(EQ03, StDevQ03, CDFx, x)
+! c		*****************************************
 	
 
-c		***************
-		MwQ03BWIPct = x
-c		***************
+! c		***************
+		! MwQ03BWIPct = x
+! c		***************
 
-		if (MwQ03BWIPct>1) then
-			MwQ03BWIPct=1
-		end if
+		! if (MwQ03BWIPct>1) then
+			! MwQ03BWIPct=1
+		! end if
 	
-		if (MwQ03BWIPct<0) then
-			MwQ03BWIPct=0
-		end if
+		! if (MwQ03BWIPct<0) then
+			! MwQ03BWIPct=0
+		! end if
 	
-	end subroutine xBDATMwQ03BWI
+	! end subroutine xBDATMwQ03BWI
 
 
-c	****************************************************************************************
-	subroutine BDATPctQ03BWI(BDATBArtNr,D,H,Q03,
-	1						MwQ03BWI,StDevQ03BWI,PctQ03BWI)
-c	****************************************************************************************
+! c	****************************************************************************************
+	! subroutine BDATPctQ03BWI(BDATBArtNr,D,H,Q03,
+	! 1						MwQ03BWI,StDevQ03BWI,PctQ03BWI)
+! c	****************************************************************************************
 
-c		q0.3 - PercentilWert = PctQ03BWI = F(D,H,q0.3) / Mittelwert / Standardabweichung = F(D,H)
+! c		q0.3 - PercentilWert = PctQ03BWI = F(D,H,q0.3) / Mittelwert / Standardabweichung = F(D,H)
 
-c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
-c 		D			REAL*4	EIN	- BHD [cm]
-c		H			REAL*4	EIN	- BaumHöhe [m] 
-c		Q03   		REAL*4	EIN	- Formquotient für die Percentilbestimmung
-c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (geschätzt)
-c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
-c		PctQ03BWI	REAL*4	AUS - q0.3 - Percentilwert (geschätzt) zu q0.3, D, H 
+! c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
+! c 		D			REAL*4	EIN	- BHD [cm]
+! c		H			REAL*4	EIN	- BaumHöhe [m] 
+! c		Q03   		REAL*4	EIN	- Formquotient für die Percentilbestimmung
+! c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (geschätzt)
+! c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
+! c		PctQ03BWI	REAL*4	AUS - q0.3 - Percentilwert (geschätzt) zu q0.3, D, H 
 
-c	****************************************************************************************
+! c	****************************************************************************************
 
-!dec$ ATTRIBUTES  DLLEXPORT :: BDATPctQ03BWI
+! !dec$ ATTRIBUTES  DLLEXPORT :: BDATPctQ03BWI
 
-		Integer*2	BDATBArtNr 
-		Real*4		D, H, Q03
-		Real*4		MwQ03BWI, StDevQ03BWI, PctQ03BWI
+		! Integer*2	BDATBArtNr 
+		! Real*4		D, H, Q03
+		! Real*4		MwQ03BWI, StDevQ03BWI, PctQ03BWI
 	
-		real*4		EQP(1:8,1:2,1:7)
-		real*4		SQP(1:8,1:6)
+		! real*4		EQP(1:8,1:2,1:7)
+		! real*4		SQP(1:8,1:6)
 	
-		Integer*2	BDATSKNrList(1:36)
+		! Integer*2	BDATSKNrList(1:36)
 
-		Integer*2	BDATSKNr
+		! Integer*2	BDATSKNr
 
-		Real*4		Q
-		Real*4		Q1, Q2, Q3, sQ1, sQ2, sQ3
+		! Real*4		Q
+		! Real*4		Q1, Q2, Q3, sQ1, sQ2, sQ3
 
-		Real*4		EQ03,StDevQ03 
-		Real*4		EQ03uG /0.4000/
-		Real*4		EQ03oG /0.9800/   
+		! Real*4		EQ03,StDevQ03 
+		! Real*4		EQ03uG /0.4000/
+		! Real*4		EQ03oG /0.9800/   
 
-		Real*4		a11, a12, a13, h11,	h12, H13, D1   
-		Real*4		a21, a22, a23, h21,	h22, H23, D2
+		! Real*4		a11, a12, a13, h11,	h12, H13, D1   
+		! Real*4		a21, a22, a23, h21,	h22, H23, D2
     
-		Real*4		Phi
+		! Real*4		Phi
 
-		Real*4		Z1, Z2
+		! Real*4		Z1, Z2
 
-		Real*4		CDFx, x
+		! Real*4		CDFx, x
 
-		Real*4		eps /0.001/
+		! Real*4		eps /0.001/
 	 
-c	----------------------------------------------------------------------------------------
+! c	----------------------------------------------------------------------------------------
 	
-		data BDATSKNrList						/
-	1	1,  1,  2,  2,  4,  4,  4,  3,  5,  5,
-     2	5,  1,  1,  1,  6,  6,  7,  8,  8,  8,
-     3	6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
-     4	6,  6,  7,  6,  6,  6					/
+		! data BDATSKNrList						/
+	! 1	1,  1,  2,  2,  4,  4,  4,  3,  5,  5,
+     ! 2	5,  1,  1,  1,  6,  6,  7,  8,  8,  8,
+     ! 3	6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
+     ! 4	6,  6,  7,  6,  6,  6					/
 
-c	-------------------------------- Stand 23.08.01 ----------------------------------------	
+! c	-------------------------------- Stand 23.08.01 ----------------------------------------	
 
-		data (((EQP(i,j,k),k=1,7),j=1,2),i=1,8)		/
-     1 	20,	10,	50,	0.650,	0.875,	0.850,	0.250,
-	1	55,	10,	50,	0.525,	0.860,	0.775,	0.000,
-     2	20,	10,	50,	0.750,	0.950,	0.860,	0.500,
-	2	70,	10,	50,	0.670,	0.875,	0.780,	0.000,
-     3	20,	10,	50,	0.650,	0.925,	0.860,	0.300,
-	3	70,	10,	50,	0.500,	0.825,	0.700,	0.000,
-	4	20,	10,	50,	0.700,	0.800,	0.770,	0.250,
-	4	50,	10,	50,	0.700,	0.790,	0.770,	0.000,
-	5	20,	10,	50,	0.725,	0.950,	0.875,	0.500,
-	5	60,	10,	50,	0.630,	0.875,	0.750,	0.000,
-	6	20,	10,	50,	0.700,	0.900,	0.830,	0.750,
-	6	60,	10,	50,	0.650,	0.870,	0.820,	0.000,
-	7	20,	10,	50,	0.700,	0.850,	0.840,	0.750,
-	7	60,	10,	50,	0.675,	0.840,	0.825,	0.000,
-	8	20,	10,	50,	0.775,	0.850,	0.810,	1.000,
-	8	60,	10,	50,	0.725,	0.800,	0.760,	0.000  /
+		! data (((EQP(i,j,k),k=1,7),j=1,2),i=1,8)		/
+     ! 1 	20,	10,	50,	0.650,	0.875,	0.850,	0.250,
+	! 1	55,	10,	50,	0.525,	0.860,	0.775,	0.000,
+     ! 2	20,	10,	50,	0.750,	0.950,	0.860,	0.500,
+	! 2	70,	10,	50,	0.670,	0.875,	0.780,	0.000,
+     ! 3	20,	10,	50,	0.650,	0.925,	0.860,	0.300,
+	! 3	70,	10,	50,	0.500,	0.825,	0.700,	0.000,
+	! 4	20,	10,	50,	0.700,	0.800,	0.770,	0.250,
+	! 4	50,	10,	50,	0.700,	0.790,	0.770,	0.000,
+	! 5	20,	10,	50,	0.725,	0.950,	0.875,	0.500,
+	! 5	60,	10,	50,	0.630,	0.875,	0.750,	0.000,
+	! 6	20,	10,	50,	0.700,	0.900,	0.830,	0.750,
+	! 6	60,	10,	50,	0.650,	0.870,	0.820,	0.000,
+	! 7	20,	10,	50,	0.700,	0.850,	0.840,	0.750,
+	! 7	60,	10,	50,	0.675,	0.840,	0.825,	0.000,
+	! 8	20,	10,	50,	0.775,	0.850,	0.810,	1.000,
+	! 8	60,	10,	50,	0.725,	0.800,	0.760,	0.000  /
 
-		data ((SQP(i,j),j=1,6),i=1,8)					/
-	1	0.50,	0.75,	1.00,	0.2500,	0.0700,	0.0000,
-	2	0.50,	0.75,	1.00,	0.2500,	0.0800,	0.0000,
-	3	0.50,	0.75,	1.00,	0.2500,	0.0600,	0.0000,
-	4	0.50,	0.75,	1.00,	0.3000,	0.0550,	0.0000,
-	5	0.50,	0.75,	1.00,	0.2000,	0.0600,	0.0000,
-	6	0.50,	0.75,	1.00,	0.3000,	0.0900,	0.0000,
-	7	0.50,	0.80,	1.00,	0.2500,	0.0700,	0.0000,
-	8	0.50,	0.80,	1.00,	0.0300,	0.0300,	0.0300  /
+		! data ((SQP(i,j),j=1,6),i=1,8)					/
+	! 1	0.50,	0.75,	1.00,	0.2500,	0.0700,	0.0000,
+	! 2	0.50,	0.75,	1.00,	0.2500,	0.0800,	0.0000,
+	! 3	0.50,	0.75,	1.00,	0.2500,	0.0600,	0.0000,
+	! 4	0.50,	0.75,	1.00,	0.3000,	0.0550,	0.0000,
+	! 5	0.50,	0.75,	1.00,	0.2000,	0.0600,	0.0000,
+	! 6	0.50,	0.75,	1.00,	0.3000,	0.0900,	0.0000,
+	! 7	0.50,	0.80,	1.00,	0.2500,	0.0700,	0.0000,
+	! 8	0.50,	0.80,	1.00,	0.0300,	0.0300,	0.0300  /
 
-c	-------------------------------- Stand 23.08.01 ----------------------------------------	
+! c	-------------------------------- Stand 23.08.01 ----------------------------------------	
     
-		BDATSKNr = BDATSKNrList(BDATBArtNr)
+		! BDATSKNr = BDATSKNrList(BDATBArtNr)
 	
-		a11 = EQP(BDATSKNr, 1, 4)
-		a12 = EQP(BDATSKNr, 1, 5)
-		a13 = EQP(BDATSKNr, 1, 6)
+		! a11 = EQP(BDATSKNr, 1, 4)
+		! a12 = EQP(BDATSKNr, 1, 5)
+		! a13 = EQP(BDATSKNr, 1, 6)
     
-		h11 = EQP(BDATSKNr, 1, 2)
-		h12 = EQP(BDATSKNr, 1, 3)
-		H13 = (h12 + h11) * 0.5
+		! h11 = EQP(BDATSKNr, 1, 2)
+		! h12 = EQP(BDATSKNr, 1, 3)
+		! H13 = (h12 + h11) * 0.5
     
-		D1 = EQP(BDATSKNr, 1, 1)
+		! D1 = EQP(BDATSKNr, 1, 1)
     
-		a21 = EQP(BDATSKNr, 2, 4)
-		a22 = EQP(BDATSKNr, 2, 5)
-		a23 = EQP(BDATSKNr, 2, 6)
+		! a21 = EQP(BDATSKNr, 2, 4)
+		! a22 = EQP(BDATSKNr, 2, 5)
+		! a23 = EQP(BDATSKNr, 2, 6)
     
-		h21 = EQP(BDATSKNr, 2, 2)
-		h22 = EQP(BDATSKNr, 2, 3)
-		H23 = (h22 + h21) * 0.5
+		! h21 = EQP(BDATSKNr, 2, 2)
+		! h22 = EQP(BDATSKNr, 2, 3)
+		! H23 = (h22 + h21) * 0.5
     
-		D2 = EQP(BDATSKNr, 2, 1)
+		! D2 = EQP(BDATSKNr, 2, 1)
     
-		Phi = EQP(BDATSKNr, 1, 7)	
+		! Phi = EQP(BDATSKNr, 1, 7)	
     
-c     ****************************************************************************************
-c    	* Z(H|D(i)) = MW [Q0.3| H | a(H(i,j)|D(i))]; j=1,2,3; i=1,2                            *
-c	* Ratkowsky, D.A. (1990) (4.3.9), S97                                                  *
-c     ****************************************************************************************
+! c     ****************************************************************************************
+! c    	* Z(H|D(i)) = MW [Q0.3| H | a(H(i,j)|D(i))]; j=1,2,3; i=1,2                            *
+! c	* Ratkowsky, D.A. (1990) (4.3.9), S97                                                  *
+! c     ****************************************************************************************
             
-		Q1 = 2 * (H - h11) / (h12 - h11)
-		Z1 = a11 + (a12 - a11) * (1 - ((a12 - a13) / (a13 - a11))**Q1)
-	1	/ (1 - ((a12 - a13) / (a13 - a11)) ** 2)
+		! Q1 = 2 * (H - h11) / (h12 - h11)
+		! Z1 = a11 + (a12 - a11) * (1 - ((a12 - a13) / (a13 - a11))**Q1)
+	! 1	/ (1 - ((a12 - a13) / (a13 - a11)) ** 2)
     
-		Q2 = 2 * (H - h21) / (h22 - h21)
-		Z2 = a21 + (a22 - a21) * (1 - ((a22 - a23) / (a23 - a21))**Q2)
-	1	/ (1 - ((a22 - a23) / (a23 - a21)) ** 2)
+		! Q2 = 2 * (H - h21) / (h22 - h21)
+		! Z2 = a21 + (a22 - a21) * (1 - ((a22 - a23) / (a23 - a21))**Q2)
+	! 1	/ (1 - ((a22 - a23) / (a23 - a21)) ** 2)
                 
-c     ****************************************************************************************
-c     * EQ0.3(D,H) =  E [Q0.3| D, Z(H|D(i)); i=1,2] * Ratkowsky, D.A. (1990) (4.3.23), S104  *
-c     ****************************************************************************************
+! c     ****************************************************************************************
+! c     * EQ0.3(D,H) =  E [Q0.3| D, Z(H|D(i)); i=1,2] * Ratkowsky, D.A. (1990) (4.3.23), S104  *
+! c     ****************************************************************************************
             
-		EQ03 = Z1 * Z2 * (D2 ** Phi - D1 ** Phi)
-	1	/ (Z2 * (D2 ** Phi - D ** Phi) + Z1 * (D ** Phi - D1 ** Phi))
+		! EQ03 = Z1 * Z2 * (D2 ** Phi - D1 ** Phi)
+	! 1	/ (Z2 * (D2 ** Phi - D ** Phi) + Z1 * (D ** Phi - D1 ** Phi))
 
 
-		If (EQ03 < EQ03uG) Then
-			EQ03 = EQ03uG
-		End If
+		! If (EQ03 < EQ03uG) Then
+			! EQ03 = EQ03uG
+		! End If
 
-		If (EQ03 > EQ03oG) Then
-			EQ03 = EQ03oG
-		End If
+		! If (EQ03 > EQ03oG) Then
+			! EQ03 = EQ03oG
+		! End If
     
     
-c		***************
-		MwQ03BWI = EQ03
-c		***************
+! c		***************
+		! MwQ03BWI = EQ03
+! c		***************
 
-c		Call BDATStDevQ03(BDATBArtNr, MwQ03, BDATSKNr, StDevQ03)      
+! c		Call BDATStDevQ03(BDATBArtNr, MwQ03, BDATSKNr, StDevQ03)      
                         
-		Q1 = SQP(BDATSKNr, 1)
-		Q2 = SQP(BDATSKNr, 2)
-		Q3 = SQP(BDATSKNr, 3)
+		! Q1 = SQP(BDATSKNr, 1)
+		! Q2 = SQP(BDATSKNr, 2)
+		! Q3 = SQP(BDATSKNr, 3)
     
-		sQ1 = SQP(BDATSKNr, 4)
-		sQ2 = SQP(BDATSKNr, 5)
-		sQ3 = SQP(BDATSKNr, 6)
+		! sQ1 = SQP(BDATSKNr, 4)
+		! sQ2 = SQP(BDATSKNr, 5)
+		! sQ3 = SQP(BDATSKNr, 6)
     
-		Q = EQ03
+		! Q = EQ03
 
-		if (ABS(sQ3-sQ1) < eps) then
-			StDevQ03 = sQ3
-		else	  	
-			StDevQ03 = (Q-Q3)*(Q2-Q1)*sQ1*sQ2 + (Q-Q2)*(Q1-Q3)*sQ1*sQ3
-	1		+ (Q-Q1)*(Q3-Q2)*sQ2*sQ3
+		! if (ABS(sQ3-sQ1) < eps) then
+			! StDevQ03 = sQ3
+		! else	  	
+			! StDevQ03 = (Q-Q3)*(Q2-Q1)*sQ1*sQ2 + (Q-Q2)*(Q1-Q3)*sQ1*sQ3
+	! 1		+ (Q-Q1)*(Q3-Q2)*sQ2*sQ3
 
-			StDevQ03 = StDevQ03/((Q-Q1)*(Q2-Q3)*sQ1 + (Q - Q2)*(Q3-Q1)
-	1		* sQ2 + (Q-Q3)*(Q1-Q2)*sQ3)
-		end if
+			! StDevQ03 = StDevQ03/((Q-Q1)*(Q2-Q3)*sQ1 + (Q - Q2)*(Q3-Q1)
+	! 1		* sQ2 + (Q-Q3)*(Q1-Q2)*sQ3)
+		! end if
             
-c		********************
-		StDevQ03BWI=StDevQ03
-c		********************
+! c		********************
+		! StDevQ03BWI=StDevQ03
+! c		********************
 
-		if (Q03 < eps) then
-			PctQ03BWI=0
-		else if (Q03 > 1 - eps) then
-			PctQ03BWI=1 
-		else
+		! if (Q03 < eps) then
+			! PctQ03BWI=0
+		! else if (Q03 > 1 - eps) then
+			! PctQ03BWI=1 
+		! else
 
-c			**************************************
-			x=Q03
-			Call CDFNORM(EQ03, StDevQ03, x, CDFx)
-			PctQ03BWI = CDFx
-c			**************************************
+! c			**************************************
+			! x=Q03
+			! Call CDFNORM(EQ03, StDevQ03, x, CDFx)
+			! PctQ03BWI = CDFx
+! c			**************************************
 
-		end if
+		! end if
 	
       
-	end subroutine BDATPctQ03BWI
+	! end subroutine BDATPctQ03BWI
 
 
 c	****************************************************************************************
@@ -3917,58 +3917,58 @@ c	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 c	lokal:	CDFNORM (NUM)	 CDFNORMInv (NUM)	
 c			
 c	****************************************************************************************
-	subroutine CDFNORM (mw,StDev,x,CDFx) 
-c	****************************************************************************************
+	! subroutine CDFNORM (mw,StDev,x,CDFx) 
+! c	****************************************************************************************
 
-c	Summenfunktion (CDF) der Normalverteilung :............................................. 
+! c	Summenfunktion (CDF) der Normalverteilung :............................................. 
 
-		USE numerical_libraries
-		real*4 mw
-		real*4 StDev
-		real*4 x
-		real*4 CDFx
+		! USE numerical_libraries
+		! real*4 mw
+		! real*4 StDev
+		! real*4 x
+		! real*4 CDFx
 		
-		real*4 N01
+		! real*4 N01
 
-		if (StDev <=0) then 
-			CDFx = -1
-			return
-		end if
+		! if (StDev <=0) then 
+			! CDFx = -1
+			! return
+		! end if
 
-		N01 = (x-mw)/StDev
+		! N01 = (x-mw)/StDev
 		
-		CDFx=ANORDF(N01)
+		! CDFx=ANORDF(N01)
 
-	end subroutine CDFNORM
+	! end subroutine CDFNORM
 
 
-c	****************************************************************************************
-	subroutine CDFNORMInv (mw,StDev,CDFx,x) 
-c	****************************************************************************************
+! c	****************************************************************************************
+	! subroutine CDFNORMInv (mw,StDev,CDFx,x) 
+! c	****************************************************************************************
 
-c	Inverse Summenfunktion (Percentile) der Normalverteilung :..............................
+! c	Inverse Summenfunktion (Percentile) der Normalverteilung :..............................
 
-		USE numerical_libraries
+		! USE numerical_libraries
 
-		real*4 mw
-		real*4 StDev
-		real*4 CDFx
-		real*4 x
+		! real*4 mw
+		! real*4 StDev
+		! real*4 CDFx
+		! real*4 x
 		
-		real*4 N01
+		! real*4 N01
 		
-		if (CDFx <= 0.0001) then 
-			x=-999999
-			return
-		else if (CDFx>0.9999) then
-			X=999999
-			return
-		else
-			N01=ANORIN(CDFx)
-			x=mw+N01*StDev
-		end if
+		! if (CDFx <= 0.0001) then 
+			! x=-999999
+			! return
+		! else if (CDFx>0.9999) then
+			! X=999999
+			! return
+		! else
+			! N01=ANORIN(CDFx)
+			! x=mw+N01*StDev
+		! end if
 
-	end subroutine CDFNORMInv
+	! end subroutine CDFNORMInv
 
 
 c	****************************************************************************************
