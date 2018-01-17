@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @title BDAT 2.0\n#' @description\n#' Calculates volumes and sorts, useful for forest inventories.\n#' @param speciesID ... BDATBArtNr in BDAT\n#' @param dbh D1 in BDAT\n#' @param h H in BDAT\n#' @param H1 ...\n#' @param D2 ...\n#' @param H2 ...\n#' @param hXwood length of X-Wood; Hxh in BDAT\n#' @param hInd height indicator; Hkz in BDAT\n#' @param trunkInd trunk indicator; Skz in BDAT\n#' @param Az What's the appropriate english name for Az?\n#' @param hTrunk height of trunk; Hsh in BDAT\n#' @param Zsh What's the appropriate english name for Zsh?\n#' @param Zab english name for Zab?\n#' @param sortInd sorting indicator; Sokz in BDAT\n#' @param FixLenDef list with length 4; FixLngDef in BDAT\n#' @param NMaxFixLen NMaxFixLng in BDAT\n#' @param result maybe a character vector containing \"Volume\",\n#' \"DBH\", \"IFeh\", \"FixLength\" or \"NFixLength\"; look at BDAT20 documentation\n#' @export\n\nBDAT20 <- function(\n  speciesID,\n  dbh,\n  h,\n  H1 = 1.3,\n  D2 = 0,\n  H2 = 0,\n  hXwood,\n  hInd,\n  trunkInd,\n  Az = 0,\n  hTrunk,\n  Zsh = 0,\n  Zab = 0,\n  sortInd = 0,\n  FixLenDef = list(),\n  NMaxFixLen,\n  result = \"Volume\"\n) {\n\n  dat <- data.frame(\n    sp = speciesID,\n    dbh = dbh,\n    h = h,\n    H1 = H1,\n    D2 = D2,\n    H2 = H2,\n    hXwood = hXwood,\n    hInd = hInd,\n    trunkInd = trunkInd,\n    Az = Az,\n    hTrunk = hTrunk,\n    Zsh = Zsh,\n    Zab = Zab,\n    sortInd = sortInd,\n    FixLenDef = FixLenDef,\n    NMaxFixLen = NMaxFixLen\n  )\n\n  if (result == \"Volume\") {\n    volumeS <- sapply(\n      1:nrow(dat),\n      function(a){\n        .Fortran(\n          \"BDAT20\",\n          as.integer(dat$sp[a]),\n          as.single(dat$dbh[a]),\n          as.single(dat$H1[a]),\n          as.single(dat$D2[a]),\n          as.single(dat$H2[a]),\n          as.single(dat$h[a]),\n          as.single(dat$hXwood[a]),\n          as.integer(dat$hInd[a]),\n          as.integer(dat$trunkInd[a]),\n          as.single(dat$Az[a]),\n          as.single(dat$hTrunk[a]),\n          as.single(dat$Zsh[a]),\n          as.single(dat$Zab[a]),\n          as.integer(dat$sortInd[a]),\n          Skl = lapply(rep(as.single(0), 6), function(a) {as.single(0)}),\n          Vol = lapply(rep(as.single(0), 7), function(a) {as.single(0)}),\n          BHD = as.single(0),\n          Ifeh = as.single(0), # in subroutine parameter is called 'Ifeh' with little f\n          FixLngDef = as.single(dat$FixLenDef), # how shall this be done vectorized?\n          NMaxFixLng = as.integer(dat$NMaxFixLen[a]),\n          FixLng = lapply(rep(as.single(0), 180), function(a) {as.single(0)}),\n          NFixLng = as.integer(0)\n        )$Vol\n      }\n    )\n  }\n\n  return(volumeS)\n\n}\n",
+    "created" : 1516195014259.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "1901706716",
+    "id" : "4860B391",
+    "lastKnownWriteTime" : 1516204040,
+    "last_content_update" : -2147483648,
+    "path" : "H:/FVA-Projekte/P01479_HE_VSB/Programme/Eigenentwicklung/RCode/rBDATPRO/R/BDAT20.R",
+    "project_path" : "R/BDAT20.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

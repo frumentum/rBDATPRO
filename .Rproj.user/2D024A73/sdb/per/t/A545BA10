@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "dyn.load(\"src/rBDATPRO.dll\")\nis.loaded(\"bdatvoldhmr_\") #> TRUE\nis.loaded(\"bdat20_\") #> TRUE\n# .C(\"baum0_\") #> R crashes!\n",
+    "created" : 1516118713668.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "3796375400",
+    "id" : "A545BA10",
+    "lastKnownWriteTime" : 1516120733,
+    "last_content_update" : -2147483648,
+    "path" : "H:/FVA-Projekte/P01479_HE_VSB/Programme/Eigenentwicklung/RCode/rBDATPRO/R/tmp.r",
+    "project_path" : "R/tmp.r",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
