@@ -60,8 +60,15 @@ BDAT20 <- function(
     NMaxFixLen = NMaxFixLen
   )
 
-  if (result == "Volume") {
-    volumeS <- sapply(
+  n = length(speciesID)
+  Skl = matrix(rep(1,n*6), ncol=6)
+  Vol = matrix(rep(0,n*7), ncol=7)
+  FixLng = matrix(rep(0,n*180), ncol=180)
+  NFixLng = rep(0,n)
+  iErr = rep(0,n)
+
+  # if (result == "Volume") {
+    tmp <- sapply(
       1:nrow(dat),
       function(a){
         .Fortran(
@@ -80,19 +87,23 @@ BDAT20 <- function(
           as.single(dat$Zsh[a]),
           as.single(dat$Zab[a]),
           as.integer(dat$sortInd[a]),
-          Skl = lapply(rep(as.single(0), 6), function(a) {as.single(0)}),
-          Vol = lapply(rep(as.single(0), 7), function(a) {as.single(0)}),
+          Skl = as.single(Skl),
+          Vol = as.single(Vol),
           BHD = as.single(0),
-          Ifeh = as.single(0), # in subroutine parameter is called 'Ifeh' with little f
+          Ifeh = as.integer(iErr), # in subroutine parameter is called 'Ifeh' with little f
           FixLngDef = as.single(dat$FixLenDef), # how shall this be done vectorized?
           NMaxFixLng = as.integer(dat$NMaxFixLen[a]),
-          FixLng = lapply(rep(as.single(0), 180), function(a) {as.single(0)}),
-          NFixLng = as.integer(0)
+          FixLng = as.single(FixLng),
+          NFixLng = as.integer(NFixLng)
         )$Vol
       }
     )
-  }
+  # }
 
-  return(volumeS)
+    return(list(Skl = matrix(tmp$Skl,ncol=6,byrow=T),
+                Vol = matrix(tmp$Volumen,ncol=7,byrow=T),
+                iErr = tmp$iErr,
+                FixLng = matrix(tmp$FixLng,ncol=180,byrow=T),
+                NFixLng = tmp$NFixLng))
 
 }
