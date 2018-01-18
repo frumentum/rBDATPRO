@@ -3,13 +3,13 @@
 #' Calculates tree's volume beginning from section A to B.
 #' Balk is included.
 #' @param speciesID here comes the description of speciesID...
-#' @param dbh ... and here the one of bhd
-#' @param h ...
-#' @param lh ...
-#' @param uh ...
+#' @param D1 ... and here the one of bhd
 #' @param H1 maybe just link to BDAT20 for details of H1, D2, H2, IErr
 #' @param D2 ...
 #' @param H2 ...
+#' @param H ...
+#' @param lh ...
+#' @param uh ...
 #' @param SecLng section length, default is 0.1m...
 #' @param bark logical... is output attr(, "bark") really necessary???
 #' @details
@@ -20,30 +20,31 @@
 #' which values will be returned?
 #' @examples
 #' one example would be nice
+#' @useDynLib rBDATPRO
 #' @export
 
 getVolume <- function(
   speciesID,
-  dbh,
-  h,
-  lh,
-  uh,
+  D1,
   H1 = 1.3,
   D2 = 0,
   H2 = 0,
+  H,
+  lh,
+  uh,
   SecLen = 0.1,
   bark = T
 ){
 
   dat <- data.frame(
     sp = speciesID,
-    dbh = dbh,
-    h = h,
-    lh = lh,
-    uh = uh,
+    D1 = D1,
     H1 = H1,
     D2 = D2,
     H2 = H2,
+    H = H,
+    lh = lh,
+    uh = uh,
     SecLen = SecLen
   )
 
@@ -54,11 +55,11 @@ getVolume <- function(
         .Fortran(
           "BDATVolABmR",
           as.integer(dat$sp[a]),
-          as.single(dat$dbh[a]),
+          as.single(dat$D1[a]),
           as.single(dat$H1[a]),
           as.single(dat$D2[a]),
           as.single(dat$H2[a]),
-          as.single(dat$h[a]),
+          as.single(dat$H[a]),
           as.single(dat$lh[a]),
           as.single(dat$uh[a]),
           as.single(dat$SecLen[a]),
@@ -74,11 +75,11 @@ getVolume <- function(
         .Fortran(
           "BDATVolABoR",
           as.integer(dat$sp[a]),
-          as.single(dat$dbh[a]),
+          as.single(dat$D1[a]),
           as.single(dat$H1[a]),
           as.single(dat$D2[a]),
           as.single(dat$H2[a]),
-          as.single(dat$h[a]),
+          as.single(dat$H[a]),
           as.single(dat$lh[a]),
           as.single(dat$uh[a]),
           as.single(dat$SecLen[a]),

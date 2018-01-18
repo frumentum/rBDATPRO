@@ -4,23 +4,22 @@
 \alias{getDiameter}
 \title{diameter at height X}
 \usage{
-getDiameter(speciesID, dbh, h, Hx, H1 = 1.3, D2 = 0, H2 = 0,
-  bark = TRUE)
+getDiameter(speciesID, D1, H1 = 1.3, D2 = 0, H2 = 0, H, Hx, bark = TRUE)
 }
 \arguments{
 \item{speciesID}{... BDATBArtNr in BDAT}
 
-\item{dbh}{... D1 in BDAT}
-
-\item{h}{... H in BDAT}
-
-\item{Hx}{...}
+\item{D1}{... D1 in BDAT}
 
 \item{H1}{...}
 
 \item{D2}{...}
 
 \item{H2}{...}
+
+\item{H}{... H in BDAT}
+
+\item{Hx}{...}
 }
 \value{
 ...

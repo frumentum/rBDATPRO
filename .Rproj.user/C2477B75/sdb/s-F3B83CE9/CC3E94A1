@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @title diameter at height X\n#' @description\n#' The diameter at height X is calculated for a tree with dimensions <<dbh, H1, D2, H2, h>>.\n#' @param speciesID ... BDATBArtNr in BDAT\n#' @param D1 ... D1 in BDAT\n#' @param H1 ...\n#' @param D2 ...\n#' @param H2 ...\n#' @param H ... H in BDAT\n#' @param Hx ...\n#' @details ...\n#' @return ...\n#' @examples ...\n#' @export\n\ngetDiameter <- function(\n  speciesID,\n  D1,\n  H1 = 1.3,\n  D2 = 0,\n  H2 = 0,\n  H,\n  Hx,\n  bark = TRUE\n) {\n\n  dat <- data.frame(\n    sp = speciesID,\n    D1 = D1,\n    H1 = H1,\n    D2 = D2,\n    H2 = H2,\n    H = H,\n    Hx = Hx\n  )\n\n  if (isTRUE(bark)) {\n    diameterS <- sapply(\n      1:nrow(dat),\n      function(a){\n        .Fortran(\n          \"BDATDmRHx\",\n          as.integer(dat$sp[a]),\n          as.single(dat$D1[a]),\n          as.single(dat$H1[a]),\n          as.single(dat$D2[a]),\n          as.single(dat$H2[a]),\n          as.single(dat$H[a]),\n          as.single(dat$Hx[a]),\n          wIErr = as.integer(0),\n          wDmRHx = as.single(0)\n        )$wDmRHx\n      }\n    )\n  } else {\n    diameterS <- sapply(\n      1:nrow(dat),\n      function(a){\n        .Fortran(\n          \"BDATDoRHx\",\n          as.integer(dat$sp[a]),\n          as.single(dat$D1[a]),\n          as.single(dat$H1[a]),\n          as.single(dat$D2[a]),\n          as.single(dat$H2[a]),\n          as.single(dat$H[a]),\n          as.single(dat$Hx[a]),\n          wIErr = as.integer(0),\n          wDoRHx = as.single(0)\n        )$wDoRHx\n      }\n    )\n  }\n\n  return(diameterS)\n}\n",
+    "created" : 1516263411700.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "1918907898",
+    "id" : "CC3E94A1",
+    "lastKnownWriteTime" : 1516281356,
+    "last_content_update" : -2147483648,
+    "path" : "H:/FVA-Projekte/P01479_HE_VSB/Programme/Eigenentwicklung/RCode/rBDATPRO/R/getDiameter.R",
+    "project_path" : "R/getDiameter.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
