@@ -1,4 +1,4 @@
-#' @title BDAT Volume section A to B
+#' @title Volume section A to B
 #' @description
 #' Calculates tree's volume beginning from section A to B.
 #' Balk is included.
@@ -11,7 +11,6 @@
 #' @param D2 ...
 #' @param H2 ...
 #' @param SecLng section length, default is 0.1m...
-#' @param IErr ...
 #' @param bark logical... is output attr(, "bark") really necessary???
 #' @details
 #' maybe some details? e.g. that function is vectorized and therefore one
@@ -23,7 +22,7 @@
 #' one example would be nice
 #' @export
 
-BDATVolAB <- function(
+getVolume <- function(
   speciesID,
   dbh,
   h,
@@ -33,7 +32,6 @@ BDATVolAB <- function(
   D2 = 0,
   H2 = 0,
   SecLen = 0.1,
-  IErr = 0,
   bark = T
 ){
 
@@ -46,10 +44,7 @@ BDATVolAB <- function(
     H1 = H1,
     D2 = D2,
     H2 = H2,
-    SecLen = SecLen,
-    IErr = IErr
-    # wVolABmR = VolABmR,
-    # wVolABoR = VolABoR
+    SecLen = SecLen
   )
 
   if (isTRUE(bark)) {
@@ -67,7 +62,7 @@ BDATVolAB <- function(
           as.single(dat$lh[a]),
           as.single(dat$uh[a]),
           as.single(dat$SecLen[a]),
-          as.integer(dat$IErr[a]),
+          IFeh = as.integer(0),
           VolABmR = as.single(0)
         )$VolABmR
       }
@@ -87,7 +82,7 @@ BDATVolAB <- function(
           as.single(dat$lh[a]),
           as.single(dat$uh[a]),
           as.single(dat$SecLen[a]),
-          as.integer(dat$IErr[a]),
+          IFeh = as.integer(0),
           VolABoR = as.single(0)
         )$VolABoR
       }
