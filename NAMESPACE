@@ -2,6 +2,7 @@
 
 export(BDAT20)
 export(BDATD2H2Trans)
+export(cdfNormal)
 export(getBarkSize)
 export(getDiameter)
 export(getHeight)

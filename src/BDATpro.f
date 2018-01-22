@@ -3076,7 +3076,7 @@ c		********************
 		end if
 
 c		*****************************************
-		Call CDFNORMInv(EQ03, StDevQ03, CDFx, x)
+		Call normal_cdf_inv (CDFx, EQ03, StDevQ03, x)
 c		*****************************************
 
 
@@ -3275,7 +3275,7 @@ c		********************
 
 c			**************************************
 			x=Q03
-			Call CDFNORM(EQ03, StDevQ03, x, CDFx)
+			Call normal_cdf(x, EQ03, StDevQ03, CDFx)
 			PctQ03BWI = CDFx
 c			**************************************
 
