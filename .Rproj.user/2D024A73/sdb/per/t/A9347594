@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' @title Volume section A to B\n#' @description\n#' Calculates tree's volume beginning from section A to B.\n#' Balk is included.\n#' @param speciesID here comes the description of speciesID...\n#' @param D1 ... and here the one of bhd\n#' @param H1 maybe just link to BDAT20 for details of H1, D2, H2, IErr\n#' @param D2 ...\n#' @param H2 ...\n#' @param H ...\n#' @param lh ...\n#' @param uh ...\n#' @param SecLng section length, default is 0.1m...\n#' @param bark logical... is output attr(, \"bark\") really necessary???\n#' @details\n#' maybe some details? e.g. that function is vectorized and therefore one\n#' can simply use a numeric vector as input (not only one number).\n#' But using a numeric vector assumes all vectors need to be from  the same length.\n#' @return\n#' which values will be returned?\n#' @examples\n#' one example would be nice\n#' @useDynLib rBDATPRO\n#' @export\n\ngetVolume <- function(\n  speciesID,\n  D1,\n  H1 = 1.3,\n  D2 = 0,\n  H2 = 0,\n  H,\n  lh,\n  uh,\n  SecLen = 0.1,\n  bark = T\n){\n\n  dat <- data.frame(\n    sp = speciesID,\n    D1 = D1,\n    H1 = H1,\n    D2 = D2,\n    H2 = H2,\n    H = H,\n    lh = lh,\n    uh = uh,\n    SecLen = SecLen\n  )\n\n  if (isTRUE(bark)) {\n    volumeS <- sapply(\n      1:nrow(dat),\n      function(a){\n        .Fortran(\n          \"BDATVolABmR\",\n          as.integer(dat$sp[a]),\n          as.single(dat$D1[a]),\n          as.single(dat$H1[a]),\n          as.single(dat$D2[a]),\n          as.single(dat$H2[a]),\n          as.single(dat$H[a]),\n          as.single(dat$lh[a]),\n          as.single(dat$uh[a]),\n          as.single(dat$SecLen[a]),\n          IFeh = as.integer(0),\n          VolABmR = as.single(0)\n        )$VolABmR\n      }\n    )\n  } else {\n    volumeS <- sapply(\n      1:nrow(dat),\n      function(a){\n        .Fortran(\n          \"BDATVolABoR\",\n          as.integer(dat$sp[a]),\n          as.single(dat$D1[a]),\n          as.single(dat$H1[a]),\n          as.single(dat$D2[a]),\n          as.single(dat$H2[a]),\n          as.single(dat$H[a]),\n          as.single(dat$lh[a]),\n          as.single(dat$uh[a]),\n          as.single(dat$SecLen[a]),\n          IFeh = as.integer(0),\n          VolABoR = as.single(0)\n        )$VolABoR\n      }\n    )\n  }\n\n  ## there might be equal values in a and b, and the calculated value should be\n  ## zero: BDAT obviously is not able to produce zero --> override such case!\n  volumeS <- ifelse(dat$lh == dat$uh, 0, volumeS)\n  ## add indicator, whether calculated volume includes bark (=> TRUE)\n  attr(volumeS, \"bark\") <- bark # really necessary??\n\n  return(volumeS)\n}\n",
+    "created" : 1516342125649.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "946076252",
+    "id" : "A9347594",
+    "lastKnownWriteTime" : 1516280890,
+    "last_content_update" : 1516280890,
+    "path" : "H:/FVA-Projekte/P01479_HE_VSB/Programme/Eigenentwicklung/RCode/rBDATPRO/R/getVolume.R",
+    "project_path" : "R/getVolume.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

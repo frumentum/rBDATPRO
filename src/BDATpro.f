@@ -3938,7 +3938,7 @@ c		USE numerical_libraries
 		N01 = (x-mw)/StDev
 
 c		CDFx=ANORDF(N01)
-		CDFx=-1
+		CDFx=0.5
 
 	end subroutine CDFNORM
 
