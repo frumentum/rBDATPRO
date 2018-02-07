@@ -1,20 +1,28 @@
 #' @title Volume of tree segment
 #'
-#' @description this function calculates the volume of a tree segment given
+#' @description This function calculates the volume of a tree segment given
 #'  species, diameter, height (NOT YET: d03), beginning and end height
 #' of the segment. One can choose if bark should be included or excluded via
-#' the boolean parameter bark, which if set to TRUE includes bark.
+#' the boolean parameter bark, which will include bark if it is set to TRUE.
 #'
 #' @param sp species code from BDAT
 #' @param d diameter in breast height (dbh) from tree
 #' @param h height of tree
 #' @param lh lower height in tree of segment for which volume is required
 #' @param uh upper height in tree of segment for which volume is required
-#' @param bark boolean, if TRUE volume including bark is calculated
-#' @export
+#' @param H1 height where \code{d} was measured; default is 1.3[m] for dbh
+#' @param D2 diameter at second height \code{H2}; if \code{D2 = 0} (default)
+#' data from the first BWI (Bundeswaldinventur) are used
+#' @param H2 according to D2, default is 0
+#' @param SeqLen the tree is divided in \code{tree height / SeqLen}
+#' compartiments so \code{SeqLen} influences the calculated precision
+#' @param bark boolean, if TRUE volume including bark is calculated (default)
 #' @return volume with bark of given segment inside stem in cubic meter
+#' @examples
+#' getVolume(1, 30, 40, 10, 20, bark = T)
+#' @export
 
-get_vol <- function(
+getVolume <- function(
   sp,
   d,
   h,
@@ -24,10 +32,9 @@ get_vol <- function(
   D2 = 0,
   H2 = 0,
   SekLng = 0.1,
-  IFeh = 0,
   VolABmR = 0,
   VolABoR = 0,
-  bark
+  bark = TRUE
 ){
   # at first load BDAT
   if (isTRUE(bark)) {
@@ -41,10 +48,7 @@ get_vol <- function(
                             H1 = H1,
                             D2 = D2,
                             H2 = H2,
-                            wSekLng = SekLng,
-                            wIErr = IFeh,
-                            wVolABmR = VolABmR,
-                            wVolABoR = VolABoR)
+                            wSekLng = SekLng)
 
   if (isTRUE(bark)){
     vol <- sapply(1:nrow(get_vol_dat), function(a){
@@ -57,8 +61,8 @@ get_vol <- function(
                   wA = get_vol_dat$a[a],
                   wB = get_vol_dat$b[a],
                   wSekLng = get_vol_dat$wSekLng[a],
-                  wIErr = get_vol_dat$wIErr[a],
-                  wVolABmR = get_vol_dat$wVolABmR[a])})
+                  wIErr = 0, # because it's a fortran output variable
+                  wVolABmR = 0)}) # fortran output variable
   } else {
     vol <- sapply(1:nrow(get_vol_dat), function(a){
       BDATVOLABOR(wBDATBArtNr = get_vol_dat$BDATArt[a],
@@ -70,8 +74,8 @@ get_vol <- function(
                   wA = get_vol_dat$a[a],
                   wB = get_vol_dat$b[a],
                   wSekLng = get_vol_dat$wSekLng[a],
-                  wIErr = get_vol_dat$wIErr[a],
-                  wVolABoR = get_vol_dat$wVolABoR[a])})
+                  wIErr = 0, # fortran output variable
+                  wVolABoR = 0)}) # fortran output variable
   }
   ## there might be equal values in a and b, and the calculated value should be
   ## zero: BDAT obviously is not able to produce zero --> override such case!
