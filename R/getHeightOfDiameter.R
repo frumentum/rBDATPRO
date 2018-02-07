@@ -1,25 +1,29 @@
 #' @title Height of given diameter inside tree taper
 #'
-#' @description this function calculates the height of a given diameter inside
+#' @description This function calculates the height of a given diameter inside
 #' a tree taper of given dimensions (dbh, h)
 #'
 #' @param sp species code from BDAT
 #' @param d diameter in breast height (dbh) from tree
 #' @param h height of tree
 #' @param dx diameter for which height is required
-#' @export
+#' @param H1 height where \code{d} was measured; default is 1.3[m] for dbh
+#' @param D2 diameter at second height \code{H2}; if \code{D2 = 0} (default)
+#' data from the first BWI (Bundeswaldinventur) are used
+#' @param H2 according to D2, default is 0
 #' @return height of diameter dx inside stem taper
+#' @examples
+#' getHeightOfDiameter(1, 30, 40, 20)
+#' @export
 
-get_height_of_d <- function(
+getHeightOfDiameter <- function(
   sp,
   d,
   h,
   dx,
   H1 = 1.3,
   D2 = 0,
-  H2 = 0,
-  Hx = 0,
-  IFeh = 0
+  H2 = 0
 ){
   # at first, use loadBDAT for loading fortran function in global.env
   loadBDAT(fun = "BDATHXDX")
@@ -30,9 +34,7 @@ get_height_of_d <- function(
                     dx = dx,
                     H1 = H1,
                     D2 = D2,
-                    H2 = H2,
-                    Hx = Hx,
-                    IFeh = IFeh)
+                    H2 = H2)
   ## get height of diameter inside stem
   H <- sapply(1:nrow(dat), function(a) {
     BDATHXDX(BDATBArtNr = dat$BDATArt[a],
@@ -41,9 +43,9 @@ get_height_of_d <- function(
              D2 = dat$D2[a],
              H2 = dat$H2[a],
              H = dat$h[a],
-             Hx = dat$Hx[a],
+             Hx = 0, # fortran output variable
              Dx = dat$dx[a],
-             IFeh = dat$IFeh[a])[1]
+             IFeh = 0)[1] # IFeh is output variable
   })
   # remove BDATHXDX before returning the result
   rm(BDATHXDX, envir = .GlobalEnv)
