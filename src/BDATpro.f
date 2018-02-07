@@ -90,7 +90,7 @@ c     ###################################################################
 c     SUBROUTINE BDAT20(	BDATBArtNr, D1,	H1, D2, H2, H,
 c     ###################################################################
 
-c		Real*4		A,B,SekLng,VolABmR
+c		double precision		A,B,SekLng,VolABmR
 
 c     ###################################################################
 c      SUBroutine Sortlb
@@ -126,14 +126,14 @@ c	?nderung <<22.09.03>> :-------------------------------------------------------
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-c	REAL*4 HStockEnde /0/,HStHAnfang /0/,LngStH /0/,HStHLzEnde /0/
+c	double precision HStockEnde /0/,HStHAnfang /0/,LngStH /0/,HStHLzEnde /0/
 
 c	COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
-c	REAL*4		HStockEnde
-c	REAL*4		HStHAnfang
-c	REAL*4		LngStH
-c	REAL*4		HStHLzEnde
-c	REAL*4		BDATHGes
+c	double precision		HStockEnde
+c	double precision		HStHAnfang
+c	double precision		LngStH
+c	double precision		HStHLzEnde
+c	double precision		BDATHGes
 
 c	COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 c	1					   ,BDATHGes
@@ -207,17 +207,17 @@ c     ##################################################################
 c	...<<07.03.03>> : ?nderung :............................................................
 
 c	***************************************************************************************
-c	Real*4 Function FNBDATHxDxoR(	BDATBArtNr,D1,H1,D2,H2,H,
+c	REAL*4 function FNBDATHxDxoR(	BDATBArtNr,D1,H1,D2,H2,H,
 c	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
 c	***************************************************************************************
-c	Real*4 Function FNBDATHxDxoRFoRu(	BDATBArtNr,D1,H1,D2,H2,H,
+c	REAL*4 function FNBDATHxDxoRFoRu(	BDATBArtNr,D1,H1,D2,H2,H,
 c	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
 c	***************************************************************************************
-c	Real*4 Function FNBDATDxFoRu(Dx)
+c	REAL*4 function FNBDATDxFoRu(Dx)
 c	***************************************************************************************
 
 c	...<<20.01.03>> : ?nderung :............................................................
@@ -250,7 +250,7 @@ c     ##################################################################
 c
 c	?nderungen: <<16.08.02>> :--------------------------------------------------------------
 c
-c 	real*4 function xFNBDATVolDHmR(	BDATBArtNr, D1, H1, D2, H2,	Hges,
+c 	REAL*4 function xFNBDATVolDHmR(	BDATBArtNr, D1, H1, D2, H2,	Hges,
 c	2						DHGrz, HDHGrz, SekLng, IErr,VolDHmR)
 c	----------------------------------------------------------------------------------------
 c
@@ -377,101 +377,101 @@ c		?nderung <<22.09.03>> :------------------------------------------------------
 c  		implicit logical (a-z)
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
 
 c		?nderung <<03.11.05>> :--------------------------------------------------------------
-		Real*4		Dx
-		Real*4		Hx
+		double precision		Dx
+		double precision		Hx
 		Integer*2	Hkz
 		Integer*2	Skz
-		Real*4		Az
-		Real*4		Hsh
-		Real*4		Zsh
-		Real*4		Zab
+		double precision		Az
+		double precision		Hsh
+		double precision		Zsh
+		double precision		Zab
 		Integer*2	Sokz
 		Integer*2	Skl(1:6)
-		Real*4		Vol(1:7)
-		Real*4		Bhd
+		double precision		Vol(1:7)
+		double precision		Bhd
 		Integer*2	Ifeh
 
-		Real*4		FixLngDef(1:NParFixLngDef)
+		double precision		FixLngDef(1:NParFixLngDef)
 		Integer*2	NMaxFixLng
-		Real*4		FixLng(1:NParFixLng*MMaxFixLng)
+		double precision		FixLng(1:NParFixLng*MMaxFixLng)
 		Integer*2	NFixLng
 
 c	----------------------------------------------------------------------------------------
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wH
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wH
 
-		Real*4		wHx
+		double precision		wHx
 		Integer*2	wHkz
 		Integer*2	wSkz
-		Real*4		wAz
-		Real*4		wHsh
-		Real*4		wZsh,wwZsh
+		double precision		wAz
+		double precision		wHsh
+		double precision		wZsh,wwZsh
 
 c		?nderung <<03.11.05>> :--------------------------------------------------------------
 
-		Real*4		wHZsh
-		Real*4		wZab
+		double precision		wHZsh
+		double precision		wZab
 		Integer*2	wSokz
 
  		Integer*2	wSkl(1:6)	/6*0/
- 		Real*4		wVol(1:7)	/7*0/
+ 		double precision		wVol(1:7)	/7*0/
 
-		Real*4		wBhd
+		double precision		wBhd
 		Integer*2	wIfeh
 
 		Integer*2	wNMaxFixLng
-		Real*4		wFixLng(1:MMaxFixLng, 1:NParFixLng)
+		double precision		wFixLng(1:MMaxFixLng, 1:NParFixLng)
 
 c	----------------------------------------------------------------------------------------
 
 		integer*2	i,j,ij, IErr
-		real*4		Hges, HDMinFixLng, H0FixLng,H1FixLng,HMaxFixLng
-		real*4      wH0, wL0
-		real*4		DMmR,DMoR,DZmR,DZoR,wDx,VoloR,SuVoloR
+		double precision		Hges, HDMinFixLng, H0FixLng,H1FixLng,HMaxFixLng
+		double precision      wH0, wL0
+		double precision		DMmR,DMoR,DZmR,DZoR,wDx,VoloR,SuVoloR
 
-		real*4		FixLngZ						/7/
-		real*4		FixLngM						/2/
-		real*4		FixLngZugPrz				/0/
-		real*4		FixLngZugCm					/0/
+		double precision		FixLngZ						/7/
+		double precision		FixLngM						/2/
+		double precision		FixLngZugPrz				/0/
+		double precision		FixLngZugCm					/0/
 
-		Real*4		Pi							/3.14159E0/
+		double precision		Pi							/3.14159E0/
 
 c	---------------------------------------------------------------------------------------
 
-		real*4		wHAz				/0/ !   H?he Aufarbeitungszopf
-		Real*4		wDHGrz				/7/	!	DerholzGrenze in cm
-		Real*4		wHDHGrz				/0/	!	H?he der DerbHolzGrenze (aus)
-		real*4		wSekLng				/2/ !   SektionsL?ngen VolBerechnung
-		Real*4		wVolDHmR				!	VolumenDerbHolz		(aus)
+		double precision		wHAz				/0/ !   H?he Aufarbeitungszopf
+		double precision		wDHGrz				/7/	!	DerholzGrenze in cm
+		double precision		wHDHGrz				/0/	!	H?he der DerbHolzGrenze (aus)
+		double precision		wSekLng				/2/ !   SektionsL?ngen VolBerechnung
+		double precision		wVolDHmR				!	VolumenDerbHolz		(aus)
 
 c	---------------------------------------------------------------------------------------
 
 c		?nderung <<22.09.03>> :--------------------------------------------------------------
 
-		Real*4		A,B,SekLng,VolABmR,VolDHmR
-		Real*4		wH0FixLng
+		double precision		A,B,SekLng,VolABmR,VolDHmR
+		double precision		wH0FixLng
 
 c	---------------------------------------------------------------------------------------
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-		REAL*4		HStockEnde	/0/
-		REAL*4		HStHAnfang	/0/
-		REAL*4		LngStH		/0/
-		REAL*4		HStHLzEnde	/0/
-		REAL*4		HBDATGes	/0/
+		double precision		HStockEnde	/0/
+		double precision		HStHAnfang	/0/
+		double precision		LngStH		/0/
+		double precision		HStHLzEnde	/0/
+		double precision		HBDATGes	/0/
 
 		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
@@ -979,70 +979,70 @@ c	...<<14.03.03>> : ?nderung :..................................................
 		parameter	(StammFussPrz =1)
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
 		Integer*2	Hkz
 		Integer*2	Skz
-		Real*4		Az
-		Real*4		Hsh
-		Real*4		Zsh
-		Real*4		Zab
+		double precision		Az
+		double precision		Hsh
+		double precision		Zsh
+		double precision		Zab
 		Integer*2	Sokz
 		Integer*2	Skl(1:6)
-		Real*4		Vol(1:7)
-		Real*4		Bhd
+		double precision		Vol(1:7)
+		double precision		Bhd
 		Integer*2	Ifeh
 
 c	----------------------------------------------------------------------------------------
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wH
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wH
+		double precision		wHx
 		Integer*2	wHkz
 		Integer*2	wSkz
-		Real*4		wAz
-		Real*4		wHsh
-		Real*4		wZsh
-		Real*4		wZab
+		double precision		wAz
+		double precision		wHsh
+		double precision		wZsh
+		double precision		wZab
 		Integer*2	wSokz
 		Integer*2	wSkl(1:6)
-		Real*4		wVol(1:7)
-		Real*4		wBhd
+		double precision		wVol(1:7)
+		double precision		wBhd
 		Integer*2	wIfeh
 
 c	----------------------------------------------------------------------------------------
 
 		integer*2	i,ij, IErr
-		real*4		Hges, HDMinFixLng, H0FixLng,H1FixLng,HMaxFixLng
-		real*4      wH0, wL0
-		real*4		DMmR,DMoR,DZmR,DZoR,wDx,VoloR,SuVoloR
+		double precision		Hges, HDMinFixLng, H0FixLng,H1FixLng,HMaxFixLng
+		double precision      wH0, wL0
+		double precision		DMmR,DMoR,DZmR,DZoR,wDx,VoloR,SuVoloR
 
-		Real*4		Pi							/3.14159E0/
+		double precision		Pi							/3.14159E0/
 
 c	---------------------------------------------------------------------------------------
 
-		Real*4		wDHGrz				/7/	!	DerholzGrenze in cm
-		Real*4		wHDHGrz					!	H?he der DerbHolzGrenze (aus)
-		real*4		wSekLng				/2/ !   SektionsL?ngen VolBerechnung
-		Real*4		wVolDHmR				!	VolumenDerbHolz		(aus)
+		double precision		wDHGrz				/7/	!	DerholzGrenze in cm
+		double precision		wHDHGrz					!	H?he der DerbHolzGrenze (aus)
+		double precision		wSekLng				/2/ !   SektionsL?ngen VolBerechnung
+		double precision		wVolDHmR				!	VolumenDerbHolz		(aus)
 
 c	---------------------------------------------------------------------------------------
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-		REAL*4		HStockEnde
-		REAL*4		HStHAnfang
-		REAL*4		LngStH
-		REAL*4		HStHLzEnde
-		REAL*4		HBDATGes
+		double precision		HStockEnde
+		double precision		HStHAnfang
+		double precision		LngStH
+		double precision		HStHLzEnde
+		double precision		HBDATGes
 
 		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
@@ -1287,41 +1287,41 @@ c	...<<14.03.03>> : ?nderung :..................................................
 c!dec$ ATTRIBUTES  DLLEXPORT :: xBDAT10
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
 		Integer*2	Hkz
 		Integer*2	Skz
-		Real*4		Az
-		Real*4		Hsh
-		Real*4		Zsh
-		Real*4		Zab
+		double precision		Az
+		double precision		Hsh
+		double precision		Zsh
+		double precision		Zab
 		Integer*2	Sokz
 		Integer*2	Skl(1:6)
-		Real*4		Vol(1:7)
-		Real*4		Bhd
+		double precision		Vol(1:7)
+		double precision		Bhd
 		Integer*2	Ifeh
 
 c     ----------------------------------------------------------------------------------------
-		Real*4		DHGrz				/7/	!	DerholzGrenze in cm
-		Real*4		HDHGrz					!	H?he der DerbHolzGrenze (aus)
-		real*4		SekLng				/2/ !   SektionsL?ngen VolBerechnung
-		Real*4		VolDHmR					!	VolumenDerbHolz		(aus)
+		double precision		DHGrz				/7/	!	DerholzGrenze in cm
+		double precision		HDHGrz					!	H?he der DerbHolzGrenze (aus)
+		double precision		SekLng				/2/ !   SektionsL?ngen VolBerechnung
+		double precision		VolDHmR					!	VolumenDerbHolz		(aus)
 c	----------------------------------------------------------------------------------------
-		Real*4		SuVoloR
+		double precision		SuVoloR
 c	----------------------------------------------------------------------------------------
 
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-		REAL*4		HStockEnde
-		REAL*4		HStHAnfang
-		REAL*4		LngStH
-		REAL*4		HStHLzEnde
-		REAL*4		HBDATGes
+		double precision		HStockEnde
+		double precision		HStHAnfang
+		double precision		LngStH
+		double precision		HStHLzEnde
+		double precision		HBDATGes
 
 		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
@@ -1385,16 +1385,16 @@ c	******************************************************************************
 c	Derbholzvolumen zu gegebenem DerbholzGrenzDurchmesser :.................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		DHGrz					!	DerholzGrenze in cm
-		Real*4		HDHGrz					!	H?he der DerbHolzGrenze (aus)
-		real*4		SekLng
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		DHGrz					!	DerholzGrenze in cm
+		double precision		HDHGrz					!	H?he der DerbHolzGrenze (aus)
+		double precision		SekLng
 		Integer*2	IErr
-		Real*4		VolDHmR					!	VolumenDerbHolz		(aus)
+		double precision		VolDHmR					!	VolumenDerbHolz		(aus)
 
 C	-----------------------------------------------------------------------------------------
 		VolDHmR = xFNBDATVolDHmR(BDATBArtNr, D1, H1, D2, H2,Hges,
@@ -1405,7 +1405,7 @@ C	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
- 	real*4 function FNBDATVolDHmR(	BDATBArtNr, D1, H1, D2, H2,	Hges,
+ 	REAL*4 function FNBDATVolDHmR(	BDATBArtNr, D1, H1, D2, H2,	Hges,
 	2						DHGrz, HDHGrz, SekLng, IErr,VolDHmR)
 c	****************************************************************************************
 
@@ -1414,18 +1414,18 @@ c	******************************************************************************
 c	Derbholzvolumen zu gegebenem DerbholzGrenzDurchmesser :.................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		DHGrz					!	DerholzGrenze in cm
-		Real*4		HDHGrz					!	H?he der DerbHolzGrenze (aus)
-		real*4		SekLng
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		DHGrz					!	DerholzGrenze in cm
+		double precision		HDHGrz					!	H?he der DerbHolzGrenze (aus)
+		double precision		SekLng
 		Integer*2	IErr
-		Real*4		VolDHmR					!	VolumenDerbHolz		(aus)
+		double precision		VolDHmR					!	VolumenDerbHolz		(aus)
 
-		real*4		Dx,Hx,A,B,VolABmR
+		double precision		Dx,Hx,A,B,VolABmR
 
 c	----------------------------------------------------------------------------------------
 		VolDHmR = xFNBDATVolDHmR(BDATBArtNr, D1, H1, D2, H2,Hges,
@@ -1438,25 +1438,25 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
- 	real*4 function xFNBDATVolDHmR(	BDATBArtNr, D1, H1, D2, H2,	Hges,
+ 	REAL*4 function xFNBDATVolDHmR(	BDATBArtNr, D1, H1, D2, H2,	Hges,
 	2						DHGrz, HDHGrz, SekLng, IErr,VolDHmR)
 c	****************************************************************************************
 
 c	Derbholzvolumen zu gegebenem DerbholzGrenzDurchmesser :.................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		DHGrz					!	DerholzGrenze in cm
-		Real*4		HDHGrz					!	H?he der DerbHolzGrenze (aus)
-		real*4		SekLng
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		DHGrz					!	DerholzGrenze in cm
+		double precision		HDHGrz					!	H?he der DerbHolzGrenze (aus)
+		double precision		SekLng
 		Integer*2	IErr
-		Real*4		VolDHmR					!	VolumenDerbHolz		(aus)
+		double precision		VolDHmR					!	VolumenDerbHolz		(aus)
 
-		real*4		Dx,Hx,A,B,VolABmR
+		double precision		Dx,Hx,A,B,VolABmR
 
 c	-----------------------------------------------------------------------------------------
 
@@ -1489,28 +1489,28 @@ c	...	BaumVolumen [m?] f?r den Abschnitt Stammh?he A - B durch sektionsweise Kub
 c		in Form von Walzen der L?nge SekLng.
 
 c		Integer*2	BDATBArtNr	-	BDATBaumArtSchl?ssel
-c		Real*4		D1				-	Durchmesser (cm) in H?he wH1 (wH1 = 0 : H1 = 1.3 m)
-c		Real*4		H1				-	H?he (m) Durchmesser 1 (0: wH1 = 1.3)
-c		Real*4		D2				-	Durchmesser(cm) in H?he wH2 (vgl. BDAT)
-c		Real*4		H2				-	H?he (m) Durchmesser 2 (0: wH2 = 7.0)
-c		Real*4		Hges			-	Stammh?he (m)
-c		Real*4		A				-	Abschnittsanfang (m) f?r die Voluminierung
-c		Real*4		B				-	Abschnittsende (m) f?r die Voluminierung
-c		Real*4		SekLng			-	Sektionsl?nge (m)
+c		double precision		D1				-	Durchmesser (cm) in H?he wH1 (wH1 = 0 : H1 = 1.3 m)
+c		double precision		H1				-	H?he (m) Durchmesser 1 (0: wH1 = 1.3)
+c		double precision		D2				-	Durchmesser(cm) in H?he wH2 (vgl. BDAT)
+c		double precision		H2				-	H?he (m) Durchmesser 2 (0: wH2 = 7.0)
+c		double precision		Hges			-	Stammh?he (m)
+c		double precision		A				-	Abschnittsanfang (m) f?r die Voluminierung
+c		double precision		B				-	Abschnittsende (m) f?r die Voluminierung
+c		double precision		SekLng			-	Sektionsl?nge (m)
 c		Integer*2	IErr			-	Fehlerindikator
-c		Real*4		VolABmR		-	Abschnittsvolumen (m?) in Rinde
+c		double precision		VolABmR		-	Abschnittsvolumen (m?) in Rinde
 
  		Integer*2	wBDATBArtNr
- 		Real*4		wD1
- 		Real*4		wH1
- 		Real*4		wD2
- 		Real*4		wH2
- 		Real*4		wHges
- 		Real*4		wA
- 		Real*4		wB
- 		Real*4		wSekLng
+ 		double precision		wD1
+ 		double precision		wH1
+ 		double precision		wD2
+ 		double precision		wH2
+ 		double precision		wHges
+ 		double precision		wA
+ 		double precision		wB
+ 		double precision		wSekLng
  		Integer*2	wIErr
- 		Real*4		wVolABmR
+ 		double precision		wVolABmR
 
 c	----------------------------------------------------------------------------------------
 		wVolABmR = xFNBDATVolABmR(	wBDATBArtNr,wD1,wH1,wD2,wH2,wHges,
@@ -1521,7 +1521,7 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	real*4 Function FNBDATVolABmR(	wBDATBArtNr, wD1, wH1, wD2,
+	REAL*4 function FNBDATVolABmR(	wBDATBArtNr, wD1, wH1, wD2,
 	1								wH2, wHges, wA, wB, wSekLng,
      2								wIErr, wVolABmR)
 c	****************************************************************************************
@@ -1532,16 +1532,16 @@ c	...	BaumVolumen [m?] f?r den Abschnitt Stammh?he A - B durch sektionsweise Kub
 c		Form von Walzen der L?nge SekLng.
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wA
-		Real*4		wB
-		Real*4		wSekLng
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wA
+		double precision		wB
+		double precision		wSekLng
 		Integer*2	wIErr
-		Real*4		wVolABmR
+		double precision		wVolABmR
 
 c	----------------------------------------------------------------------------------------
 		FNBDATVolABmR = xFNBDATVolABmR(	wBDATBArtNr,wD1,wH1,wD2,wH2,
@@ -1552,7 +1552,7 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	real*4 Function xFNBDATVolABmR(	wBDATBArtNr, wD1, wH1, wD2,
+	REAL*4 function xFNBDATVolABmR(	wBDATBArtNr, wD1, wH1, wD2,
 	1								wH2, wHges, wA, wB, wSekLng,
      2								wIErr, wVolABmR)
 c	****************************************************************************************
@@ -1561,29 +1561,29 @@ c	...	BaumVolumen [m?] f?r den Abschnitt Stammh?he A - B durch sektionsweise Kub
 c		Form von Walzen der L?nge SekLng.
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wA
-		Real*4		wB
-		Real*4		wSekLng
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wA
+		double precision		wB
+		double precision		wSekLng
 		Integer*2	wIErr
-		Real*4		wVolABmR
+		double precision		wVolABmR
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		Hes
-		Real*4		A
-		Real*4		B
-		Real*4		SekLng
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		Hes
+		double precision		A
+		double precision		B
+		double precision		SekLng
 		Integer*2	IErr
-		Real*4		VolABmR
+		double precision		VolABmR
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -1592,33 +1592,33 @@ c		Form von Walzen der L?nge SekLng.
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		volum(7)	/7*0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		volum(7)	/7*0.0/
 
-		Real*4		Pi			/3.14159E0/
+		double precision		Pi			/3.14159E0/
 
 c	........................................................................................
 
-		Real*4		BHD
-		Real*4		D7
-		Real*4		H
-		Real*4		Hx
-		Real*4		HxM
-		Real*4		VolAx
-		Real*4		VolBx
-		Real*4		Ax
-		Real*4		Bx
-		Real*4		ABx
+		double precision		BHD
+		double precision		D7
+		double precision		H
+		double precision		Hx
+		double precision		HxM
+		double precision		VolAx
+		double precision		VolBx
+		double precision		Ax
+		double precision		Bx
+		double precision		ABx
 
 c	----------------------------------------------------------------------------------------
 
@@ -1795,29 +1795,29 @@ c	...	BaumVolumen [m?] f?r den Abschnitt Stammh?he A - B durch sektionsweise Kub
 c		in Form von Walzen der L?nge SekLng.
 
 c		Integer*2	BDATBArtNr	-	BDATBaumArtSchl?ssel
-c		Real*4		D1				-	Durchmesser (cm) in H?he wH1 (wH1 = 0 : H1 = 1.3 m)
-c		Real*4		H1				-	H?he (m) Durchmesser 1 (0: wH1 = 1.3)
-c		Real*4		D2				-	Durchmesser(cm) in H?he wH2 (vgl. BDAT)
-c		Real*4		H2				-	H?he (m) Durchmesser 2 (0: wH2 = 7.0)
-c		Real*4		Hges			-	Stammh?he (m)
-c		Real*4		A				-	Abschnittsanfang (m) f?r die Voluminierung
-c		Real*4		B				-	Abschnittsende (m) f?r die Voluminierung
-c		Real*4		SekLng			-	Sektionsl?nge (m)
+c		double precision		D1				-	Durchmesser (cm) in H?he wH1 (wH1 = 0 : H1 = 1.3 m)
+c		double precision		H1				-	H?he (m) Durchmesser 1 (0: wH1 = 1.3)
+c		double precision		D2				-	Durchmesser(cm) in H?he wH2 (vgl. BDAT)
+c		double precision		H2				-	H?he (m) Durchmesser 2 (0: wH2 = 7.0)
+c		double precision		Hges			-	Stammh?he (m)
+c		double precision		A				-	Abschnittsanfang (m) f?r die Voluminierung
+c		double precision		B				-	Abschnittsende (m) f?r die Voluminierung
+c		double precision		SekLng			-	Sektionsl?nge (m)
 c		Integer*2	IErr			-	Fehlerindikator
-c		Real*4		VolABoR		-	Abschnittsvolumen (m?) in Rinde
+c		double precision		VolABoR		-	Abschnittsvolumen (m?) in Rinde
 c
 c	----------------------------------------------------------------------------------------
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wA
-		Real*4		wB
-		Real*4		wSekLng
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wA
+		double precision		wB
+		double precision		wSekLng
 		Integer*2	wIErr
-		Real*4		wVolABoR
+		double precision		wVolABoR
 
 c	----------------------------------------------------------------------------------------
 	    wVolABoR=xFNBDATVolABoR(	wBDATBArtNr, wD1, wH1, wD2,
@@ -1829,7 +1829,7 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	real*4 Function FNBDATVolABoR(	wBDATBArtNr, wD1, wH1, wD2,
+	REAL*4 function FNBDATVolABoR(	wBDATBArtNr, wD1, wH1, wD2,
 	1								wH2, wHges, wA, wB, wSekLng,
      2								wIErr, wVolABoR)
 c	****************************************************************************************
@@ -1840,16 +1840,16 @@ c	...	BaumVolumen [m?] f?r den Abschnitt Stammh?he A - B durch sektionsweise Kub
 c		Form von Walzen der L?nge SekLng.
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wA
-		Real*4		wB
-		Real*4		wSekLng
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wA
+		double precision		wB
+		double precision		wSekLng
 		Integer*2	wIErr
-		Real*4		wVolABoR
+		double precision		wVolABoR
 
 
 c	----------------------------------------------------------------------------------------
@@ -1862,7 +1862,7 @@ c	------------------------------------------------------------------------------
 	End Function FNBDATVolABoR
 
 c	****************************************************************************************
-	real*4 Function xFNBDATVolABoR(	wBDATBArtNr, wD1, wH1, wD2,
+	REAL*4 function xFNBDATVolABoR(	wBDATBArtNr, wD1, wH1, wD2,
 	1								wH2, wHges, wA, wB, wSekLng,
      2								wIErr, wVolABoR)
 c	****************************************************************************************
@@ -1873,29 +1873,29 @@ c	...	BaumVolumen [m?] f?r den Abschnitt Stammh?he A - B durch sektionsweise Kub
 c		Form von Walzen der L?nge SekLng.
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wA
-		Real*4		wB
-		Real*4		wSekLng
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wA
+		double precision		wB
+		double precision		wSekLng
 		Integer*2	wIErr
-		Real*4		wVolABoR
+		double precision		wVolABoR
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		Hes
-		Real*4		A
-		Real*4		B
-		Real*4		SekLng
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		Hes
+		double precision		A
+		double precision		B
+		double precision		SekLng
 		Integer*2	IErr
-		Real*4		VolABoR
+		double precision		VolABoR
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -1904,33 +1904,33 @@ c		Form von Walzen der L?nge SekLng.
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		volum(7)	/7*0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		volum(7)	/7*0.0/
 
-		Real*4		Pi			/3.14159E0/
+		double precision		Pi			/3.14159E0/
 
 c	........................................................................................
 
-		Real*4		BHD
-		Real*4		D7
-		Real*4		H
-		Real*4		Hx
-		Real*4		HxM
-		Real*4		VolAx
-		Real*4		VolBx
-		Real*4		Ax
-		Real*4		Bx
-		Real*4		ABx
+		double precision		BHD
+		double precision		D7
+		double precision		H
+		double precision		Hx
+		double precision		HxM
+		double precision		VolAx
+		double precision		VolBx
+		double precision		Ax
+		double precision		Bx
+		double precision		ABx
 
 c	----------------------------------------------------------------------------------------
 
@@ -2123,14 +2123,14 @@ c	******************************************************************************
 !dec$ ATTRIBUTES  DLLEXPORT :: BDATDmRHx
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDmRHx
+		double precision		wDmRHx
 
 c	----------------------------------------------------------------------------------------
 		wDmRHx = xFNBDATDmRHx(wBDATBArtNr, wD1, wH1, wD2, wH2
@@ -2141,21 +2141,21 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	Real*4 Function FNBDATDmRHx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function FNBDATDmRHx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1								wHges, wHx, wIErr, wDmRHx)
 c	****************************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: FNBDATDmRHx
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDmRHx
+		double precision		wDmRHx
 
 c	----------------------------------------------------------------------------------------
 		FNBDATDmRHx = xFNBDATDmRHx(wBDATBArtNr, wD1, wH1, wD2, wH2
@@ -2166,30 +2166,30 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	Real*4 Function xFNBDATDmRHx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function xFNBDATDmRHx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1						wHges, wHx, wIErr, wDmRHx)
 c	****************************************************************************************
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDmRHx
+		double precision		wDmRHx
 
 c	----------------------------------------------------------------------------------------
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		Hx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		Hx
 		Integer*2	IErr
-		Real*4		DmRHx
+		double precision		DmRHx
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -2198,23 +2198,23 @@ c	------------------------------------------------------------------------------
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		Pi			/3.14159E0/
-		Real*4		volum(7)	/7*0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		Pi			/3.14159E0/
+		double precision		volum(7)	/7*0.0/
 
-		Real*4		BHD
-		Real*4		D7
-		Real*4		H
+		double precision		BHD
+		double precision		D7
+		double precision		H
 
 c	----------------------------------------------------------------------------------------
 
@@ -2262,30 +2262,30 @@ c		----------------------------------
 	End Function xFNBDATDmRHx
 
 c	****************************************************************************************
-	Real*4 Function yFNBDATDmRHx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function yFNBDATDmRHx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1						wHges, wHx, wIErr, wDmRHx)
 c	****************************************************************************************
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDmRHx
+		double precision		wDmRHx
 
 c	----------------------------------------------------------------------------------------
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		Hx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		Hx
 		Integer*2	IErr
-		Real*4		DmRHx
+		double precision		DmRHx
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -2294,23 +2294,23 @@ c	------------------------------------------------------------------------------
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		Pi			/3.14159E0/
-		Real*4		volum(7)	/7*0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		Pi			/3.14159E0/
+		double precision		volum(7)	/7*0.0/
 
-		Real*4		BHD
-		Real*4		D7
-		Real*4		H
+		double precision		BHD
+		double precision		D7
+		double precision		H
 
 c	----------------------------------------------------------------------------------------
 
@@ -2366,14 +2366,14 @@ c	******************************************************************************
 !dec$ ATTRIBUTES  DLLEXPORT :: BDATDoRHx
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDoRHx
+		double precision		wDoRHx
 
 c	----------------------------------------------------------------------------------------
 		wDoRHx=xFNBDATDoRHx (	wBDATBArtNr, wD1, wH1, wD2, wH2,
@@ -2384,21 +2384,21 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	Real*4 Function FNBDATDoRHx (	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function FNBDATDoRHx (	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1								wHges, wHx, wIErr, wDoRHx)
 c	****************************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: FNBDATDoRHx
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDoRHx
+		double precision		wDoRHx
 
 c	----------------------------------------------------------------------------------------
 		FNBDATDoRHx=xFNBDATDoRHx (	wBDATBArtNr, wD1, wH1, wD2, wH2,
@@ -2409,29 +2409,29 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	Real*4 Function xFNBDATDoRHx (	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function xFNBDATDoRHx (	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1								wHges, wHx, wIErr, wDoRHx)
 c	****************************************************************************************
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wDoRHx
+		double precision		wDoRHx
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		Hx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		Hx
 		Integer*2	IErr
-		Real*4		DoRHx
+		double precision		DoRHx
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -2440,25 +2440,25 @@ c	******************************************************************************
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		Pi			/3.14159E0/
-		Real*4		volum(7)	/7*0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		Pi			/3.14159E0/
+		double precision		volum(7)	/7*0.0/
 
-		Real*4		kw			/0.0/
+		double precision		kw			/0.0/
 
-		Real*4		BHD
-		Real*4		D7
-		Real*4		H
+		double precision		BHD
+		double precision		D7
+		double precision		H
 
 c	----------------------------------------------------------------------------------------
 
@@ -2508,14 +2508,14 @@ c	******************************************************************************
 !dec$ ATTRIBUTES  DLLEXPORT :: BDATRinde2Hx
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wRinde2Hx
+		double precision		wRinde2Hx
 
 c	----------------------------------------------------------------------------------------
 		wRinde2Hx = xFNBDATRinde2Hx(wBDATBArtNr, wD1, wH1, wD2,
@@ -2526,21 +2526,21 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	Real*4 Function FNBDATRinde2Hx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function FNBDATRinde2Hx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1								wHges, wHx, wIErr, wRinde2Hx)
 c	****************************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: FNBDATRinde2Hx
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wRinde2Hx
+		double precision		wRinde2Hx
 
 c	----------------------------------------------------------------------------------------
 		FNBDATRinde2Hx = xFNBDATRinde2Hx(wBDATBArtNr, wD1, wH1, wD2,
@@ -2551,29 +2551,29 @@ c	------------------------------------------------------------------------------
 
 
 c	****************************************************************************************
-	Real*4 Function xFNBDATRinde2Hx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
+	REAL*4 function xFNBDATRinde2Hx(	wBDATBArtNr, wD1, wH1, wD2, wH2,
 	1								wHges, wHx, wIErr, wRinde2Hx)
 c	****************************************************************************************
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
-		Real*4		wHx
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
+		double precision		wHx
 		Integer*2	wIErr
-		Real*4		wRinde2Hx
+		double precision		wRinde2Hx
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
-		Real*4		Hx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
+		double precision		Hx
 		Integer*2	IErr
-		Real*4		Rinde2Hx
+		double precision		Rinde2Hx
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -2582,25 +2582,25 @@ c	******************************************************************************
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		Pi			/3.14159E0/
-		Real*4		volum(7)	/7*0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		Pi			/3.14159E0/
+		double precision		volum(7)	/7*0.0/
 
-		Real*4		kw			/0.0/
+		double precision		kw			/0.0/
 
-		Real*4		BHD
-		Real*4		D7
-		Real*4		H
+		double precision		BHD
+		double precision		D7
+		double precision		H
 
 c	----------------------------------------------------------------------------------------
 
@@ -2651,11 +2651,11 @@ c	******************************************************************************
 
 c	----------------------------------------------------------------------------------------
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
 c	----------------------------------------------------------------------------------------
 		call xBDATD2H2Trans (	wBDATBArtNr, wD1, wH1, wD2, wH2,wHges)
 c	----------------------------------------------------------------------------------------
@@ -2668,18 +2668,18 @@ c	******************************************************************************
 c	****************************************************************************************
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wHges
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wHges
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		Hges
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		Hges
 
 		Integer*2	Hkz			/0/
 		Integer*2	sok			/0/
@@ -2688,26 +2688,26 @@ c	******************************************************************************
 		Integer*2	iz			/0/
 		Integer*2	klasse(6)	/6*0/
 
-		Real*4		Du			/0.0/
-		Real*4		Hu			/0.0/
-		Real*4		ddo			/0.0/
-		Real*4		Ho			/0.0/
-		Real*4		BHDz		/0.0/
-		Real*4		tmp			/0.0/
-		Real*4		Stxu		/0.0/
-		Real*4		Azop		/0.0/
-		Real*4		sthh		/0.0/
-		Real*4		Zost		/0.0/
-		Real*4		Zoab		/0.0/
-		Real*4		Pi			/3.14159E0/
-		Real*4		volum(7)	/7*0.0/
-		Real*4		kw			/0.0/
+		double precision		Du			/0.0/
+		double precision		Hu			/0.0/
+		double precision		ddo			/0.0/
+		double precision		Ho			/0.0/
+		double precision		BHDz		/0.0/
+		double precision		tmp			/0.0/
+		double precision		Stxu		/0.0/
+		double precision		Azop		/0.0/
+		double precision		sthh		/0.0/
+		double precision		Zost		/0.0/
+		double precision		Zoab		/0.0/
+		double precision		Pi			/3.14159E0/
+		double precision		volum(7)	/7*0.0/
+		double precision		kw			/0.0/
 
 c	----------------------------------------------------------------------------------------
 
-		Real*4		Hx, Dx, Q03Pct,MwQ03BWI,StDevQ03BWI,MwQ03BWIPct
+		double precision		Hx, Dx, Q03Pct,MwQ03BWI,StDevQ03BWI,MwQ03BWIPct
 		Integer*2	iERR		/0/
-		Real*4		H,D2t,H2t,D2u,D2o
+		double precision		H,D2t,H2t,D2u,D2o
 c	----------------------------------------------------------------------------------------
 
 		if (wH1<=0) then
@@ -2869,12 +2869,12 @@ c	******************************************************************************
 c		q0.3 - Percentile = MwQ03BWIPct = F(D,H,PctlWert) / MW / STD = F(D,H)
 c
 c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
-c 		D			REAL*4	EIN	- BHD [cm]
-c		H			REAL*4	EIN	- BaumH?he [m]
-c		Q03Pct		REAL*4	EIN	- PercentilWert (eps,1-eps) f?r MwQ03BWIPct Sch?tzung
-c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (gesch?tzt)
-c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
-c		MwQ03BWIPct REAL*4	AUS - Mittlerer q0.3 - Percentilwert (gesch?tzt)
+c 		D			double precision	EIN	- BHD [cm]
+c		H			double precision	EIN	- BaumH?he [m]
+c		Q03Pct		double precision	EIN	- PercentilWert (eps,1-eps) f?r MwQ03BWIPct Sch?tzung
+c		MwQ03BWI	double precision	AUS - Mittelwert q0.3 (gesch?tzt)
+c		StDevQ03BWI double precision	AUS - Standardabweichung Mwq0.3 - Verteilung
+c		MwQ03BWIPct double precision	AUS - Mittlerer q0.3 - Percentilwert (gesch?tzt)
 
 c	****************************************************************************************
 
@@ -2882,8 +2882,8 @@ c	******************************************************************************
 
 c	----------------------------------------------------------------------------------------
 		Integer*2	BDATBArtNr
-		Real*4		D, H, Q03Pct
-		Real*4		MwQ03BWI,StDevQ03BWI, MwQ03BWIPct
+		double precision		D, H, Q03Pct
+		double precision		MwQ03BWI,StDevQ03BWI, MwQ03BWIPct
 c	----------------------------------------------------------------------------------------
 		call xBDATMwQ03BWI(BDATBArtNr,D,H,Q03Pct,
 	1						MwQ03BWI,StDevQ03BWI,MwQ03BWIPct)
@@ -2900,43 +2900,43 @@ c	******************************************************************************
 c		q0.3 - Percentile = MwQ03BWIPct = F(D,H,PctlWert) / MW / STD = F(D,H)
 c
 c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
-c 		D			REAL*4	EIN	- BHD [cm]
-c		H			REAL*4	EIN	- BaumH?he [m]
-c		Q03Pct		REAL*4	EIN	- PercentilWert (eps,1-eps) f?r MwQ03BWIPct Sch?tzung
-c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (gesch?tzt)
-c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
-c		MwQ03BWIPct REAL*4	AUS - Mittlerer q0.3 - Percentilwert (gesch?tzt)
+c 		D			double precision	EIN	- BHD [cm]
+c		H			double precision	EIN	- BaumH?he [m]
+c		Q03Pct		double precision	EIN	- PercentilWert (eps,1-eps) f?r MwQ03BWIPct Sch?tzung
+c		MwQ03BWI	double precision	AUS - Mittelwert q0.3 (gesch?tzt)
+c		StDevQ03BWI double precision	AUS - Standardabweichung Mwq0.3 - Verteilung
+c		MwQ03BWIPct double precision	AUS - Mittlerer q0.3 - Percentilwert (gesch?tzt)
 
 c	****************************************************************************************
 
 		Integer*2	BDATBArtNr
-		Real*4		D, H, Q03Pct
-		Real*4		MwQ03BWI,StDevQ03BWI, MwQ03BWIPct
+		double precision		D, H, Q03Pct
+		double precision		MwQ03BWI,StDevQ03BWI, MwQ03BWIPct
 
-		real*4		EQP(1:8,1:2,1:7)
-		real*4		SQP(1:8,1:6)
+		double precision		EQP(1:8,1:2,1:7)
+		double precision		SQP(1:8,1:6)
 
 		Integer*2	BDATSKNrList(1:36)
 
 		Integer*2	BDATSKNr
 
-		Real*4		Q
-		Real*4		Q1, Q2, Q3, sQ1, sQ2, sQ3
-		Real*4		EQ03,StDevQ03
+		double precision		Q
+		double precision		Q1, Q2, Q3, sQ1, sQ2, sQ3
+		double precision		EQ03,StDevQ03
 
-		Real*4		EQ03uG /0.4000/
-		Real*4		EQ03oG /0.9800/
+		double precision		EQ03uG /0.4000/
+		double precision		EQ03oG /0.9800/
 
-		Real*4		a11, a12, a13, h11,	h12, H13, D1
-		Real*4		a21, a22, a23, h21,	h22, H23, D2
+		double precision		a11, a12, a13, h11,	h12, H13, D1
+		double precision		a21, a22, a23, h21,	h22, H23, D2
 
-		Real*4		Phi
+		double precision		Phi
 
-		Real*4		Z1, Z2
+		double precision		Z1, Z2
 
-		Real*4		CDFx, x
+		double precision		CDFx, x
 
-		Real*4		eps /0.001/
+		double precision		eps /0.001/
 
 c	----------------------------------------------------------------------------------------
 
@@ -3076,7 +3076,7 @@ c		********************
 		end if
 
 c		*****************************************
-		Call normal_cdf_inv (CDFx, EQ03, StDevQ03, x)
+		Call CDFNORMInv(EQ03, StDevQ03, CDFx, x)
 c		*****************************************
 
 
@@ -3103,45 +3103,45 @@ c	******************************************************************************
 c		q0.3 - PercentilWert = PctQ03BWI = F(D,H,q0.3) / Mittelwert / Standardabweichung = F(D,H)
 
 c		BDATBArtNr	INT*2	EIN	- BDAT BaumArt Nummer 1-36
-c 		D			REAL*4	EIN	- BHD [cm]
-c		H			REAL*4	EIN	- BaumH?he [m]
-c		Q03   		REAL*4	EIN	- Formquotient f?r die Percentilbestimmung
-c		MwQ03BWI	REAL*4	AUS - Mittelwert q0.3 (gesch?tzt)
-c		StDevQ03BWI REAL*4	AUS - Standardabweichung Mwq0.3 - Verteilung
-c		PctQ03BWI	REAL*4	AUS - q0.3 - Percentilwert (gesch?tzt) zu q0.3, D, H
+c 		D			double precision	EIN	- BHD [cm]
+c		H			double precision	EIN	- BaumH?he [m]
+c		Q03   		double precision	EIN	- Formquotient f?r die Percentilbestimmung
+c		MwQ03BWI	double precision	AUS - Mittelwert q0.3 (gesch?tzt)
+c		StDevQ03BWI double precision	AUS - Standardabweichung Mwq0.3 - Verteilung
+c		PctQ03BWI	double precision	AUS - q0.3 - Percentilwert (gesch?tzt) zu q0.3, D, H
 
 c	****************************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: BDATPctQ03BWI
 
 		Integer*2	BDATBArtNr
-		Real*4		D, H, Q03
-		Real*4		MwQ03BWI, StDevQ03BWI, PctQ03BWI
+		double precision		D, H, Q03
+		double precision		MwQ03BWI, StDevQ03BWI, PctQ03BWI
 
-		real*4		EQP(1:8,1:2,1:7)
-		real*4		SQP(1:8,1:6)
+		double precision		EQP(1:8,1:2,1:7)
+		double precision		SQP(1:8,1:6)
 
 		Integer*2	BDATSKNrList(1:36)
 
 		Integer*2	BDATSKNr
 
-		Real*4		Q
-		Real*4		Q1, Q2, Q3, sQ1, sQ2, sQ3
+		double precision		Q
+		double precision		Q1, Q2, Q3, sQ1, sQ2, sQ3
 
-		Real*4		EQ03,StDevQ03
-		Real*4		EQ03uG /0.4000/
-		Real*4		EQ03oG /0.9800/
+		double precision		EQ03,StDevQ03
+		double precision		EQ03uG /0.4000/
+		double precision		EQ03oG /0.9800/
 
-		Real*4		a11, a12, a13, h11,	h12, H13, D1
-		Real*4		a21, a22, a23, h21,	h22, H23, D2
+		double precision		a11, a12, a13, h11,	h12, H13, D1
+		double precision		a21, a22, a23, h21,	h22, H23, D2
 
-		Real*4		Phi
+		double precision		Phi
 
-		Real*4		Z1, Z2
+		double precision		Z1, Z2
 
-		Real*4		CDFx, x
+		double precision		CDFx, x
 
-		Real*4		eps /0.001/
+		double precision		eps /0.001/
 
 c	----------------------------------------------------------------------------------------
 
@@ -3275,7 +3275,7 @@ c		********************
 
 c			**************************************
 			x=Q03
-			Call normal_cdf(x, EQ03, StDevQ03, CDFx)
+			Call CDFNORM(EQ03, StDevQ03, x, CDFx)
 			PctQ03BWI = CDFx
 c			**************************************
 
@@ -3291,11 +3291,11 @@ c	******************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: EQ03ParIni
 
-		real*4 WEQP(1:8,1:2,1:7)
-		real*4 WSQP(1:8,1:6)
+		double precision WEQP(1:8,1:2,1:7)
+		double precision WSQP(1:8,1:6)
 
-		real*4 EQP(1:8,1:2,1:7)
-		real*4 SQP(1:8,1:6)
+		double precision EQP(1:8,1:2,1:7)
+		double precision SQP(1:8,1:6)
 
 
 c		COMMON / EQ03 / EQP, SQP
@@ -3353,27 +3353,27 @@ c	q03 - Fortschreibung :________________________________________________________
 
 
 c	*******************************************************************************************
-	real*4 Function FNBDATEstQ032(BDATBArtNr, BHD1, D71, H1, BHD2, H2,
+	REAL*4 function FNBDATEstQ032(BDATBArtNr, BHD1, D71, H1, BHD2, H2,
 	1							Estq032, EstD72, iErr)
 c	*******************************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: FNBDATEstQ032
 
 		integer*2	BDATBArtNr
-		real*4		BHD1
-		real*4		D71
-		real*4		H1
-		real*4		BHD2
-		real*4		H2
-		real*4		Estq032
-		real*4		EstD72
+		double precision		BHD1
+		double precision		D71
+		double precision		H1
+		double precision		BHD2
+		double precision		H2
+		double precision		Estq032
+		double precision		EstD72
 		integer*2	iErr
 
-		real*4		D1,HD1,D2,HD2,H,Hx
-		real*4		q03Pct,MwQ03BWI,StDevQ03BWI,MwQ03BWIPct
-		real*4		q031,MWq031,MWq032
+		double precision		D1,HD1,D2,HD2,H,Hx
+		double precision		q03Pct,MwQ03BWI,StDevQ03BWI,MwQ03BWIPct
+		double precision		q031,MWq031,MWq032
 
-		real*4		D005,D03
+		double precision		D005,D03
 
 c	--------------------------------------------------------------------------------------------
 
@@ -3485,7 +3485,7 @@ c		******************************
 
 
 c	***************************************************************************************
-	Real*4 Function FNBDATHxDx(	BDATBArtNr,D1,H1,D2,H2,H,
+	REAL*4 function FNBDATHxDx(	BDATBArtNr,D1,H1,D2,H2,H,
 	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
@@ -3494,13 +3494,13 @@ c	******************************************************************************
 c    	...	H?he (Hx) zu gegebenem Durchmesser (Dx) :...........................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
-		Real*4		Dx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
+		double precision		Dx
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
@@ -3511,37 +3511,37 @@ c	------------------------------------------------------------------------------
 
 
 c	***************************************************************************************
-	Real*4 Function xFNBDATHxDx(	BDATBArtNr,D1,H1,D2,H2,H,
+	REAL*4 function xFNBDATHxDx(	BDATBArtNr,D1,H1,D2,H2,H,
 	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
 c    	...	H?he (Hx) zu gegebenem Durchmesser (Dx) :...........................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
-		Real*4		Dx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
+		double precision		Dx
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
 
  		Integer*2	NSFktNr			/1/
-		Real*4		NSFktPar		/0/
+		double precision		NSFktPar		/0/
 
-		Real*4		A				/0/
-		Real*4		B
-		Real*4		NSFktAbsErr		/1e-3/
-		Real*4		NSFktXAbsErr	/0/
-		Real*4		NSFktXRelErr	/1e-3/
+		double precision		A				/0/
+		double precision		B
+		double precision		NSFktAbsErr		/1e-3/
+		double precision		NSFktXAbsErr	/0/
+		double precision		NSFktXRelErr	/1e-3/
 
 		Integer*2	MIt				/100/
-		Real*4		x1
-		Real*4		x2
-		Real*4		XNS
+		double precision		x1
+		double precision		x2
+		double precision		XNS
 		Integer*2	NIt
 
 c	----------------------------------------------------------------------------------------
@@ -3565,7 +3565,7 @@ c	...<<07.03.03>> : ?nderung :..................................................
 
 
 c	***************************************************************************************
-	Real*4 Function FNBDATHxDxoR(	BDATBArtNr,D1,H1,D2,H2,H,
+	REAL*4 function FNBDATHxDxoR(	BDATBArtNr,D1,H1,D2,H2,H,
 	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
@@ -3574,13 +3574,13 @@ c	******************************************************************************
 c    	...	H?he (Hx) zu gegebenem Durchmesser oR (Dx) :.......................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
-		Real*4		Dx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
+		double precision		Dx
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
@@ -3592,37 +3592,37 @@ c	------------------------------------------------------------------------------
 
 
 c	***************************************************************************************
-	Real*4 Function xFNBDATHxDxoR(	BDATBArtNr,D1,H1,D2,H2,H,
+	REAL*4 function xFNBDATHxDxoR(	BDATBArtNr,D1,H1,D2,H2,H,
 	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
 c    	...	H?he (Hx) zu gegebenem Durchmesser oR (Dx) :.......................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
-		Real*4		Dx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
+		double precision		Dx
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
 
  		Integer*2	NSFktNr			/2/
-		Real*4		NSFktPar		/0/
+		double precision		NSFktPar		/0/
 
-		Real*4		A				/0/
-		Real*4		B
-		Real*4		NSFktAbsErr		/1e-3/
-		Real*4		NSFktXAbsErr	/0/
-		Real*4		NSFktXRelErr	/1e-3/
+		double precision		A				/0/
+		double precision		B
+		double precision		NSFktAbsErr		/1e-3/
+		double precision		NSFktXAbsErr	/0/
+		double precision		NSFktXRelErr	/1e-3/
 
 		Integer*2	MIt				/100/
-		Real*4		x1
-		Real*4		x2
-		Real*4		XNS
+		double precision		x1
+		double precision		x2
+		double precision		XNS
 		Integer*2	NIt
 
 c	----------------------------------------------------------------------------------------
@@ -3646,7 +3646,7 @@ c	...<<07.03.03>> : ?nderung :..................................................
 
 
 c	***************************************************************************************
-	Real*4 Function FNBDATHxDxoRFoRu(	BDATBArtNr,D1,H1,D2,H2,H,
+	REAL*4 function FNBDATHxDxoRFoRu(	BDATBArtNr,D1,H1,D2,H2,H,
 	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
@@ -3655,13 +3655,13 @@ c	******************************************************************************
 c    	...	H?he (Hx) zu gegebenem Durchmesser oR mit forstlicher Rundung [Dx]:................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
-		Real*4		Dx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
+		double precision		Dx
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
@@ -3673,37 +3673,37 @@ c	------------------------------------------------------------------------------
 
 
 c	***************************************************************************************
-	Real*4 Function xFNBDATHxDxoRFoRu(	BDATBArtNr,D1,H1,D2,H2,H,
+	REAL*4 function xFNBDATHxDxoRFoRu(	BDATBArtNr,D1,H1,D2,H2,H,
 	2								Hx,Dx,IErr)
 c	***************************************************************************************
 
 c    	...	H?he (Hx) zu gegebenem Durchmesser (Dx) :...........................................
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
-		Real*4		Hx
-		Real*4		Dx
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
+		double precision		Hx
+		double precision		Dx
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
 
  		Integer*2	NSFktNr			/3/
-		Real*4		NSFktPar		/0/
+		double precision		NSFktPar		/0/
 
-		Real*4		A				/0/
-		Real*4		B
-		Real*4		NSFktAbsErr		/1e-3/
-		Real*4		NSFktXAbsErr	/0/
-		Real*4		NSFktXRelErr	/1e-3/
+		double precision		A				/0/
+		double precision		B
+		double precision		NSFktAbsErr		/1e-3/
+		double precision		NSFktXAbsErr	/0/
+		double precision		NSFktXRelErr	/1e-3/
 
 		Integer*2	MIt				/100/
-		Real*4		x1
-		Real*4		x2
-		Real*4		XNS
+		double precision		x1
+		double precision		x2
+		double precision		XNS
 		Integer*2	NIt
 
 c	----------------------------------------------------------------------------------------
@@ -3727,7 +3727,7 @@ c	...<<07.03.03>> : ?nderung :..................................................
 
 
 c	****************************************************************************************
-	real*4 function FNBDATQ03VHDx
+	REAL*4 function FNBDATQ03VHDx
 	1		(	BDATBArtNr,	D1,	H1, H, Dx, VolHDx,
      2			MIt, q031, q032, q03x, NIt, IErr
 	3		)
@@ -3740,16 +3740,16 @@ c     Formquotient q0.3x zu VolHDx (Volumen bis zum GrenzDurchmesser Dx)
 c	---------------------------------------------------------------------------------------
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		H
-		Real*4		Dx
-		Real*4		VolHDx
+		double precision		D1
+		double precision		H1
+		double precision		H
+		double precision		Dx
+		double precision		VolHDx
 
 		Integer*2	MIt
-		Real*4		q031
-		Real*4		q032
-		Real*4		q03x						! Nullstelle
+		double precision		q031
+		double precision		q032
+		double precision		q03x						! Nullstelle
 
 		Integer*2	NIt
 		Integer*2	IErr
@@ -3757,40 +3757,40 @@ c	------------------------------------------------------------------------------
 c	----------------------------------------------------------------------------------------
 
 		Integer*2	NSFktNr
-		Real*4		NSFktPar
+		double precision		NSFktPar
 
-		Real*4		D2
-		Real*4		H2
+		double precision		D2
+		double precision		H2
 
-		Real*4		NSFktAbsErr				/1E-5/
-		Real*4		NSFktXAbsErr			/0.00/
-		Real*4		NSFktXRelErr			/1E-3/
+		double precision		NSFktAbsErr				/1E-5/
+		double precision		NSFktXAbsErr			/0.00/
+		double precision		NSFktXRelErr			/1E-3/
 
-		Real*4		x1
-		Real*4		x2
-		Real*4		XNs
+		double precision		x1
+		double precision		x2
+		double precision		XNs
 
-		Real*4		SekLng					/2/
-		Real*4		VolABmR					/0/
+		double precision		SekLng					/2/
+		double precision		VolABmR					/0/
 
-		Real*4		HDx1
-		Real*4		HDx2					/0/
-		Real*4		HDx3					/0/
+		double precision		HDx1
+		double precision		HDx2					/0/
+		double precision		HDx3					/0/
 
-		Real*4		A						/0/
-		Real*4		B						/0/
+		double precision		A						/0/
+		double precision		B						/0/
 
-		Real*4		VolHDx1					/0/
-		Real*4		VolHDx2					/0/
-		Real*4		VolHDx3					/0/
+		double precision		VolHDx1					/0/
+		double precision		VolHDx2					/0/
+		double precision		VolHDx3					/0/
 
 c	----------------------------------------------------------------------------------------
 
- 		Real*4		X3
-		Real*4		f1
-		Real*4		f2
-		Real*4		f3
-		Real*4		s12
+ 		double precision		X3
+		double precision		f1
+		double precision		f2
+		double precision		f3
+		double precision		s12
  		Integer*2	It
 
 c	----------------------------------------------------------------------------------------
@@ -3923,12 +3923,12 @@ c	******************************************************************************
 c	Summenfunktion (CDF) der Normalverteilung :.............................................
 
 c		USE numerical_libraries
-		real*4 mw
-		real*4 StDev
-		real*4 x
-		real*4 CDFx
+		double precision mw
+		double precision StDev
+		double precision x
+		double precision CDFx
 
-		real*4 N01
+		double precision N01
 
 		if (StDev <=0) then
 			CDFx = -1
@@ -3951,12 +3951,12 @@ c	Inverse Summenfunktion (Percentile) der Normalverteilung :....................
 
 c		USE numerical_libraries
 
-		real*4 mw
-		real*4 StDev
-		real*4 CDFx
-		real*4 x
+		double precision mw
+		double precision StDev
+		double precision CDFx
+		double precision x
 
-		real*4 N01
+		double precision N01
 
 		if (CDFx <= 0.0001) then
 			x=-999999
@@ -3987,35 +3987,35 @@ c     NullStelle einer stetigen Funktion nach dem PegasusVerfahren vgl. Engeln-M
 c	---------------------------------------------------------------------------------------
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
 
 		Integer*2	NSFktNr
-		Real*4		NSFktPar
+		double precision		NSFktPar
 
-		Real*4		A
-		Real*4		B
-		Real*4		NSFktAbsErr
-		Real*4		NSFktXAbsErr
-		Real*4		NSFktXRelErr
+		double precision		A
+		double precision		B
+		double precision		NSFktAbsErr
+		double precision		NSFktXAbsErr
+		double precision		NSFktXRelErr
 
 		Integer*2	MIt
-		Real*4		x1
-		Real*4		x2
-		Real*4		XNs						! Nullstelle
+		double precision		x1
+		double precision		x2
+		double precision		XNs						! Nullstelle
 		Integer*2	NIt
 		Integer*2	IErr
 
 c	----------------------------------------------------------------------------------------
 
- 		Real*4		X3
-		Real*4		f1
-		Real*4		f2
-		Real*4		f3
-		Real*4		s12
+ 		double precision		X3
+		double precision		f1
+		double precision		f2
+		double precision		f3
+		double precision		s12
  		Integer*2	It
 
 c	----------------------------------------------------------------------------------------
@@ -4099,35 +4099,35 @@ c    	...NullStellen Funktion f?r das PegasusVerfahren :........................
 
 
 		Integer*2	wBDATBArtNr
-		Real*4		wD1
-		Real*4		wH1
-		Real*4		wD2
-		Real*4		wH2
-		Real*4		wH
+		double precision		wD1
+		double precision		wH1
+		double precision		wD2
+		double precision		wH2
+		double precision		wH
 
  		Integer*2	wNSFktNr
-		Real*4		wNSFktPar
-		Real*4		wX
-		Real*4		wFx
+		double precision		wNSFktPar
+		double precision		wX
+		double precision		wFx
 
 		Integer*2	BDATBArtNr
-		Real*4		D1
-		Real*4		H1
-		Real*4		D2
-		Real*4		H2
-		Real*4		H
+		double precision		D1
+		double precision		H1
+		double precision		D2
+		double precision		H2
+		double precision		H
 
  		Integer*2	NSFktNr
-		Real*4		NSFktPar
-		Real*4		X
-		Real*4		Fx
+		double precision		NSFktPar
+		double precision		X
+		double precision		Fx
 
 c	---------------------------------------------------------------------------------------
 
 		Integer*2	IErr
-		Real*4		Hx
-		Real*4		Dx
-		Real*4		DmRHx,DoRHx
+		double precision		Hx
+		double precision		Dx
+		double precision		DmRHx,DoRHx
 
 c	----------------------------------------------------------------------------------------
 
@@ -4190,14 +4190,14 @@ c	...<<07.03.03>> : ?nderung :..................................................
 
 
 c	***************************************************************************************
-	Real*4 Function FNBDATDxFoRu(Dx)
+	REAL*4 function FNBDATDxFoRu(Dx)
 c	***************************************************************************************
 
 !dec$ ATTRIBUTES  DLLEXPORT :: FNBDATDxFoRu
 
 c    	...	Durchmesser forstlich gerundet [Dx] :..............................................
 
-		Real*4		Dx
+		double precision		Dx
 
 			FNBDATDxFoRu=xFNBDATDxFoRu(Dx)
 
@@ -4205,12 +4205,12 @@ c    	...	Durchmesser forstlich gerundet [Dx] :.................................
 
 
 c	***************************************************************************************
-	Real*4 Function xFNBDATDxFoRu(Dx)
+	REAL*4 function xFNBDATDxFoRu(Dx)
 c	***************************************************************************************
 
 c    	...	Durchmesser forstlich gerundet [Dx] :..............................................
 
-		Real*4		Dx
+		double precision		Dx
 
 		if (20.le.Dx) then
 			xFNBDATDxFoRu=Dx-0.75
@@ -4223,14 +4223,14 @@ c    	...	Durchmesser forstlich gerundet [Dx] :.................................
 c	...<<18.09.03>> : ?nderung :.......................................................
 
 !c	***************************************************************************************
-!	Real*4 Function FNBDATHStockEnde
+!	REAL*4 function FNBDATHStockEnde
 !c	***************************************************************************************
 !
-!		REAL*4		HStockEnde
-!		REAL*4		HStHAnfang
-!		REAL*4		LngStH
-!		REAL*4		HStHLzEnde
-!		REAL*4		HBDATGes
+!		double precision		HStockEnde
+!		double precision		HStHAnfang
+!		double precision		LngStH
+!		double precision		HStHLzEnde
+!		double precision		HBDATGes
 !
 !		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 !	1					,	HBDATGes
@@ -4242,14 +4242,14 @@ c	...<<18.09.03>> : ?nderung :..................................................
 !	END Function FNBDATHStockEnde
 
 !c	***************************************************************************************
-!	Real*4 Function FNBDATHStHAnfang
+!	REAL*4 function FNBDATHStHAnfang
 !c	***************************************************************************************
 !
-!		REAL*4		HStockEnde
-!		REAL*4		HStHAnfang
-!		REAL*4		LngStH
-!		REAL*4		HStHLzEnde
-!		REAL*4		HBDATGes
+!		double precision		HStockEnde
+!		double precision		HStHAnfang
+!		double precision		LngStH
+!		double precision		HStHLzEnde
+!		double precision		HBDATGes
 !
 !		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 !	1					,	HBDATGes
@@ -4261,14 +4261,14 @@ c	...<<18.09.03>> : ?nderung :..................................................
 !	END Function FNBDATHStHAnfang
 
 !c	***************************************************************************************
-!	Real*4 Function FNBDATLngStH
+!	REAL*4 function FNBDATLngStH
 !c	***************************************************************************************
 !
-!		REAL*4		HStockEnde
-!		REAL*4		HStHAnfang
-!		REAL*4		LngStH
-!		REAL*4		HStHLzEnde
-!		REAL*4		HBDATGes
+!		double precision		HStockEnde
+!		double precision		HStHAnfang
+!		double precision		LngStH
+!		double precision		HStHLzEnde
+!		double precision		HBDATGes
 !
 !		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 !	1					,	HBDATGes
@@ -4280,14 +4280,14 @@ c	...<<18.09.03>> : ?nderung :..................................................
 !	END Function FNBDATLngStH
 
 !c	***************************************************************************************
-!	Real*4 Function FNBDATHStHLzEnde
+!	REAL*4 function FNBDATHStHLzEnde
 !c	***************************************************************************************
 !
-!		REAL*4		HStockEnde
-!		REAL*4		HStHAnfang
-!		REAL*4		LngStH
-!		REAL*4		HStHLzEnde
-!		REAL*4		HBDATGes
+!		double precision		HStockEnde
+!		double precision		HStHAnfang
+!		double precision		LngStH
+!		double precision		HStHLzEnde
+!		double precision		HBDATGes
 !
 !		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 !	1					,	HBDATGes
@@ -4299,14 +4299,14 @@ c	...<<18.09.03>> : ?nderung :..................................................
 !	END Function FNBDATHStHLzEnde
 
 !c	***************************************************************************************
-!	Real*4 Function FNBDATHBDATGes
+!	REAL*4 function FNBDATHBDATGes
 !c	***************************************************************************************
 !
-!		REAL*4		HStockEnde
-!		REAL*4		HStHAnfang
-!		REAL*4		LngStH
-!		REAL*4		HStHLzEnde
-!		REAL*4		HBDATGes
+!		double precision		HStockEnde
+!		double precision		HStHAnfang
+!		double precision		LngStH
+!		double precision		HStHLzEnde
+!		double precision		HBDATGes
 !
 !		COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 !	1					,	HBDATGes
@@ -4526,11 +4526,11 @@ C
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-	REAL*4		HStockEnde
-	REAL*4		HStHAnfang
-	REAL*4		LngStH
-	REAL*4		HStHLzEnde
-	REAL*4		HBDATGes
+	double precision		HStockEnde
+	double precision		HStHAnfang
+	double precision		LngStH
+	double precision		HStHLzEnde
+	double precision		HBDATGes
 
 	COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
@@ -5557,11 +5557,11 @@ c     ###################################################################
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-	REAL*4		HStockEnde
-	REAL*4		HStHAnfang
-	REAL*4		LngStH
-	REAL*4		HStHLzEnde
-	REAL*4		HBDATGes
+	double precision		HStockEnde
+	double precision		HStHAnfang
+	double precision		LngStH
+	double precision		HStHLzEnde
+	double precision		HBDATGes
 
 	COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
@@ -5808,11 +5808,11 @@ c     ###################################################################
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-	REAL*4		HStockEnde
-	REAL*4		HStHAnfang
-	REAL*4		LngStH
-	REAL*4		HStHLzEnde
-	REAL*4		HBDATGes
+	double precision		HStockEnde
+	double precision		HStHAnfang
+	double precision		LngStH
+	double precision		HStHLzEnde
+	double precision		HBDATGes
 
 	COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
@@ -6183,30 +6183,30 @@ c     ###################################################################
 
       implicit logical (a-z)
 
-      REAL*4 D095,D07,Du,Do,Dnorm,H,Volir,hu,hurel,ho,horel,zopf
-      REAL*4 Azop,Dgrenz,Hazop,Hdgren,Hstzop,Habzop,PI,Zost,Zoab,Hbr
-      REAL*4 Vol,Volx,Vols,Vola,Voli,Volu,Volr,Volsu
- 	REAL*4 Volrer,Volur
+      double precision D095,D07,Du,Do,Dnorm,H,Volir,hu,hurel,ho,horel,zopf
+      double precision Azop,Dgrenz,Hazop,Hdgren,Hstzop,Habzop,PI,Zost,Zoab,Hbr
+      double precision Vol,Volx,Vols,Vola,Voli,Volu,Volr,Volsu
+ 	double precision Volrer,Volur
 
 c	<<1>> ################################### 01.04.04 #################################
 c	REAL*8 Volrer,Volur
 c	######################################### 01.04.04 #################################
 
-      REAL*4 sthh,Stxu,Rund,Hhrel,Lxu,Kw,Hakt,Lsth,W1,W0,Vl
+      double precision sthh,Stxu,Rund,Hhrel,Lxu,Kw,Hakt,Lsth,W1,W0,Vl
 
 c     INTEGER Ba,Iba,Ban(36,7),Ib,Ia,Sokz,ix
 
       INTEGER*2	Ba,Iba,Ban(36,7),Ib,Ia,Sokz
-      REAL*4		Unvd(2,27,33),Unvpr,Ddur,Riproz,Ri,Dduru,Dduri,D1,fakt
+      double precision		Unvd(2,27,33),Unvpr,Ddur,Riproz,Ri,Dduru,Dduri,D1,fakt
       INTEGER*2	Kl,Ukl,Klx,Uklx,Kla,Ukla
 
 c	...<<18.09.03>> : ?nderung :.......................................................
 
-	REAL*4		HStockEnde
-	REAL*4		HStHAnfang
-	REAL*4		LngStH
-	REAL*4		HStHLzEnde
-	REAL*4		HBDATGes
+	double precision		HStockEnde
+	double precision		HStHAnfang
+	double precision		LngStH
+	double precision		HStHLzEnde
+	double precision		HBDATGes
 
 	COMMON	/XtrComPar/	HStockEnde, HStHAnfang, LngStH, HStHLzEnde
 	1					,	HBDATGes
