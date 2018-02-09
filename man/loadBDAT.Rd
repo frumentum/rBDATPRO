@@ -2,33 +2,46 @@
 % Please edit documentation in R/loadBDAT.R
 \name{loadBDAT}
 \alias{loadBDAT}
-\title{load BDATpro}
+\title{load BDATPro}
 \usage{
 loadBDAT(fun)
 }
 \arguments{
-\item{fun}{name of the function as character string(s) which shall be loaded into global environment. see details}
+\item{fun}{name of the function as character string(s) which shall be loaded
+into global environment. See details.}
 
-\item{path}{path to BDATPRO_R.dll which need to be installed on your computer (use 32bit R version). see details}
+\item{path}{path to BDATPRO_R.dll which need to be installed on your computer
+(use 32bit R version). See details.}
 }
 \value{
-Returns a fortran function translated in R and loads it into your global environment.
+Returns a fortran function and loads it into your global environment.
 }
 \description{
 \code{loadBDAT} imports a dll file which contains a bunch of functions for
-modelling different biomass parts.
+modelling tree taper given diameters and height of a tree.
 }
 \details{
-\code{path} default is \code{"C:/Program Files (x86)/BDATPRO/R/BDATPRO_R.dll"} which is the link to installed BDAT on your FVA computer. \cr
-\code{fun} needs at least one of the following character strings to load a fortran function of BDAT in your global environment: \cr
+\code{path} default is \code{"C:/Program Files (x86)/BDATPRO/R/BDATPRO_R.dll"}
+which is the link to installed BDAT on your FVA computer. \cr
+\code{fun} needs at least one of the following character strings to load a
+fortran function of BDAT in your global environment: \cr
 \itemize{
-  \item 'BDATORHX': diameter without bark in height x
-  \item 'BDATMRHX': diameter with bark in height x
+  \item 'BDATDORHX': diameter without bark in height x
+  \item 'BDATDMRHX': diameter with bark in height x
+  \item 'BDATHXDX': get height x for given diameter x
+  \item 'BDATVOLDHOR': total volume with bark
+  \item 'BDATVOLDHMR': total volume without bark
   \item 'BDATVOLABOR': volume without bark between height A und B
   \item 'BDATVOLABMR': volume with bark between height A und B
   \item 'BDATRINDE2HX': double bark thickness at height X
-  \item 'BDATHXDX': get height x for given diameter x
-  \item 'V_BDAT20': sort function inclusive fix length
+  \item 'V_BDAT20': vectorised sorting function inclusive fix length
+}
+Not yet implemented are the following BDAT-functions:
+\itemize{
+  \item 'BDATMwQ03BWI': Mittelwert, Streuung und Formquotienten-Verteilung
+  \item 'BDATPctQ03BWI': Perzentilwert des Formquotienten
+  \item 'FNBDATQ03VHDx': Volumenäquivalenter Formquotienten
+  \item 'FNBDATEstQ032': Fortschreibung der Schaftform bei Folgeinventur
 }
 }
 \examples{

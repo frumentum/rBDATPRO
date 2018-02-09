@@ -1,33 +1,32 @@
-#' @title Volume of tree segment
+#' @title get volume of tree segment
 #'
 #' @description This function calculates the volume of a tree segment given
-#'  species, diameter, height (NOT YET: d03), beginning and end height
+#'  species, diameter, height, beginning and end height
 #' of the segment. One can choose if bark should be included or excluded via
 #' the boolean parameter bark, which will include bark if it is set to TRUE.
 #'
 #' @param sp species code from BDAT
 #' @param d diameter in breast height (dbh) from tree
 #' @param h height of tree
-#' @param lh lower height in tree of segment for which volume is required
-#' @param uh upper height in tree of segment for which volume is required
+#' @param A lower height A of segment AB for which volume is required
+#' @param B upper height B of segment AB for which volume is required
 #' @param H1 height where \code{d} was measured; default is 1.3[m] for dbh
 #' @param D2 diameter at second height \code{H2}; if \code{D2 = 0} (default)
-#' data from the first BWI (Bundeswaldinventur) are used
-#' @param H2 according to D2, default is 0
-#' @param SeqLen the tree is divided in \code{tree height / SeqLen}
-#' compartiments so \code{SeqLen} influences the calculated precision
+#' taper form from the first german NFI ('Bundeswaldinventur I') are used
+#' @param H2 measuring height of D2, default is 0
+#' @param SegLen segment length for calculating the volume
 #' @param bark boolean, if TRUE volume including bark is calculated (default)
-#' @return volume with bark of given segment inside stem in cubic meter
+#' @return volume with or without bark of given segment AB in cubic meter
 #' @examples
-#' getVolume(1, 30, 40, 10, 20, bark = T)
+#' getVolABmR(sp=1, d=30, h=40, A=10, B=20, bark = T)
 #' @export
 
-getVolume <- function(
+getSegVol <- function(
   sp,
   d,
   h,
-  lh,
-  uh,
+  A,
+  B,
   H1 = 1.3,
   D2 = 0,
   H2 = 0,
@@ -43,8 +42,8 @@ getVolume <- function(
   get_vol_dat <- data.frame(BDATArt = sp,
                             dbh = d,
                             h = h,
-                            a = lh,
-                            b = uh,
+                            a = A,
+                            b = B,
                             H1 = H1,
                             D2 = D2,
                             H2 = H2,

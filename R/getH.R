@@ -1,22 +1,22 @@
-#' @title Height of given diameter inside tree taper
+#' @title get height of given diameter inside tree taper w/ or w/o bark
 #'
 #' @description This function calculates the height of a given diameter inside
-#' a tree taper of given dimensions (dbh, h)
+#' for a given tree of dimensions (dbh, h).
 #'
 #' @param sp species code from BDAT
-#' @param d diameter in breast height (dbh) from tree
+#' @param d diameter in breast height (dbh) of tree
 #' @param h height of tree
 #' @param dx diameter for which height is required
 #' @param H1 height where \code{d} was measured; default is 1.3[m] for dbh
 #' @param D2 diameter at second height \code{H2}; if \code{D2 = 0} (default)
-#' data from the first BWI (Bundeswaldinventur) are used
+#' taper form from the first NFI ('Bundeswaldinventur I') is used
 #' @param H2 according to D2, default is 0
-#' @return height of diameter dx inside stem taper
+#' @return height of diameter \code{dx}
 #' @examples
-#' getHeightOfDiameter(1, 30, 40, 20)
+#' getH(sp=1, d=30, h=40, dx=20)
 #' @export
 
-getHeightOfDiameter <- function(
+getH <- function(
   sp,
   d,
   h,

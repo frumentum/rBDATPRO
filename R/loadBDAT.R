@@ -1,24 +1,38 @@
-#' @title load BDATpro
+#' @title load BDATPro
 #'
 #' @description
 #' \code{loadBDAT} imports a dll file which contains a bunch of functions for
-#' modelling different biomass parts.
-#' @param path path to BDATPRO_R.dll which need to be installed on your computer (use 32bit R version). see details
-#' @param fun name of the function as character string(s) which shall be loaded into global environment. see details
+#' modelling tree taper given diameters and height of a tree.
+#' @param path path to BDATPRO_R.dll which need to be installed on your computer
+#'  (use 32bit R version). See details.
+#' @param fun name of the function as character string(s) which shall be loaded
+#'  into global environment. See details.
 #' @details
-#' \code{path} default is \code{"C:/Program Files (x86)/BDATPRO/R/BDATPRO_R.dll"} which is the link to installed BDAT on your FVA computer. \cr
-#' \code{fun} needs at least one of the following character strings to load a fortran function of BDAT in your global environment: \cr
+#' \code{path} default is \code{"C:/Program Files (x86)/BDATPRO/R/BDATPRO_R.dll"}
+#' which is the link to installed BDAT on your FVA computer. \cr
+#' \code{fun} needs at least one of the following character strings to load a
+#' fortran function of BDAT in your global environment: \cr
 #' \itemize{
-#'   \item 'BDATORHX': diameter without bark in height x
-#'   \item 'BDATMRHX': diameter with bark in height x
+#'   \item 'BDATDORHX': diameter without bark in height x
+#'   \item 'BDATDMRHX': diameter with bark in height x
+#'   \item 'BDATHXDX': get height x for given diameter x
+#'   \item 'BDATVOLDHOR': total volume with bark
+#'   \item 'BDATVOLDHMR': total volume without bark
 #'   \item 'BDATVOLABOR': volume without bark between height A und B
 #'   \item 'BDATVOLABMR': volume with bark between height A und B
 #'   \item 'BDATRINDE2HX': double bark thickness at height X
-#'   \item 'BDATHXDX': get height x for given diameter x
-#'   \item 'V_BDAT20': sort function inclusive fix length
+#'   \item 'V_BDAT20': vectorised sorting function inclusive fix length
 #' }
-#' @return Returns a fortran function translated in R and loads it into your global environment.
-#' @examples loadBDAT(fun = 'BDATDORHX')
+#' Not yet implemented are the following BDAT-functions:
+#' \itemize{
+#'   \item 'BDATMwQ03BWI': Mittelwert, Streuung und Formquotienten-Verteilung
+#'   \item 'BDATPctQ03BWI': Perzentilwert des Formquotienten
+#'   \item 'FNBDATQ03VHDx': Volumenäquivalenter Formquotienten
+#'   \item 'FNBDATEstQ032': Fortschreibung der Schaftform bei Folgeinventur
+#' }
+#' @return Returns a fortran function and loads it into your global environment.
+#' @examples
+#' loadBDAT(fun = 'BDATDORHX')
 #' @export
 
 # don't know how to call @useDynLib
@@ -78,6 +92,66 @@ loadBDAT <- function(fun) {
          as.single(wHx),
          as.integer(wIErr),
          DmRHx = as.single(wDmRHx))$DmRHx
+    }
+  }
+
+  # Funktion laden: Derbholzvolumen ohne Rinde
+  if ("BDATVOLDHOR" %in% fun) {
+    .GlobalEnv$BDATVOLDHOR <- function(
+      wBDATBArtNr,
+      wD1,
+      wH1,
+      wD2,
+      wH2,
+      wHges,
+      wDHGrz,
+      wHDHGrz,
+      wSekLng,
+      wIErr,
+      wVolDHmR
+    ) {
+      .C("R_BDATVOLDHOR",
+         as.integer(wBDATBArtNr),
+         as.single(wD1),
+         as.single(wH1),
+         as.single(wD2),
+         as.single(wH2),
+         as.single(wHges),
+         as.single(wDHGrz),
+         as.single(wHDHGrz),
+         as.single(wSekLng),
+         as.integer(wIErr),
+         VolDHoR = as.single(wVolDHoR))$VolDHoR
+    }
+  }
+
+  # Funktion laden: Derbholzvolumen mit Rinde
+  if ("BDATVOLDHMR" %in% fun) {
+    .GlobalEnv$BDATVOLDHMR <- function(
+      wBDATBArtNr,
+      wD1,
+      wH1,
+      wD2,
+      wH2,
+      wHges,
+      wDHGrz,
+      wHDHGrz,
+      wSekLng,
+      wIErr,
+      wVolDHmR
+    ) {
+      .C("R_BDATVOLDHMR",
+         as.integer(wBDATBArtNr),
+         as.single(wD1),
+         as.single(wH1),
+         as.single(wD2),
+         as.single(wH2),
+         as.single(wHges),
+         as.single(wDHGrz),
+         as.single(wHDHGrz),
+         as.single(wSekLng),
+         as.integer(wIErr),
+         VolDHmR = as.single(wVolDHmR))$VolDHmR
     }
   }
 

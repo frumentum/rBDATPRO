@@ -1,7 +1,7 @@
 #' Load BDAT Dynamically Linked Libraries
 #'
 #' @return Invisibly NULL.
-#'@export
+#' @export
 load_dll <- function() {
     dyn.load(system.file("dll", "DFORRT.dll", package = "rBDATPRO"))
     dyn.load(system.file("dll", "BDATPRO.dll", package = "rBDATPRO"))
