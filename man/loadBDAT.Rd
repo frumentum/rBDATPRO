@@ -4,11 +4,15 @@
 \alias{loadBDAT}
 \title{load BDATPro}
 \usage{
-loadBDAT(fun)
+loadBDAT(fun, type = "expr")
 }
 \arguments{
 \item{fun}{name of the function as character string(s) which shall be loaded
 into global environment. See details.}
+
+\item{type}{character vector; if type is \code{expr} (default), an expression
+will be returned; if type is \code{global}, \code{fun} is loaded into global
+environment}
 }
 \value{
 Returns a fortran function and loads it into your global environment.
@@ -18,8 +22,8 @@ Returns a fortran function and loads it into your global environment.
 modelling tree taper given diameters and height of a tree.
 }
 \details{
-\code{path} default is \code{"C:/Program Files (x86)/BDATPRO/R/BDATPRO_R.dll"}
-which is the link to installed BDAT on your FVA computer. \cr
+Since this package contains the dll files compiled on Windows 32bit,
+\code{loadBDAT()} access them directly. \cr
 \code{fun} needs at least one of the following character strings to load a
 fortran function of BDAT in your global environment: \cr
 \itemize{
