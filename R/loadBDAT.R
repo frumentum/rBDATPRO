@@ -45,26 +45,26 @@ loadBDAT <- function(fun, type = "expr") {
   if ("BDATDORHX" %in% fun) {
     expr <- expression(
       BDATDORHX <- function(
-        wBDATBArtNr,
-        wD1,
-        wH1,
-        wD2,
-        wH2,
-        wHges,
-        wHx,
-        wIErr,
-        wDoRHx
+        BDATBArtNr,
+        D1,
+        H1,
+        D2,
+        H2,
+        Hges,
+        Hx,
+        IErr,
+        DoRHx
       ) {
         .C("R_BDATDORHX",
-           as.integer(wBDATBArtNr),
-           as.single(wD1),
-           as.single(wH1),
-           as.single(wD2),
-           as.single(wH2),
-           as.single(wHges),
-           as.single(wHx),
-           as.integer(wIErr),
-           DoRHx = as.single(wDoRHx))$DoRHx
+           as.integer(BDATBArtNr),
+           as.single(D1),
+           as.single(H1),
+           as.single(D2),
+           as.single(H2),
+           as.single(Hges),
+           as.single(Hx),
+           as.integer(IErr),
+           DoRHx = as.single(DoRHx))$DoRHx
 
       }
     )
@@ -74,26 +74,26 @@ loadBDAT <- function(fun, type = "expr") {
   if ("BDATDMRHX" %in% fun) {
     expr <- expression(
       BDATDMRHX <- function(
-        wBDATBArtNr,
-        wD1,
-        wH1,
-        wD2,
-        wH2,
-        wHges,
-        wHx,
-        wIErr,
-        wDmRHx
+        BDATBArtNr,
+        D1,
+        H1,
+        D2,
+        H2,
+        Hges,
+        Hx,
+        IErr,
+        DmRHx
       ) {
         .C("R_BDATDMRHX",
-           as.integer(wBDATBArtNr),
-           as.single(wD1),
-           as.single(wH1),
-           as.single(wD2),
-           as.single(wH2),
-           as.single(wHges),
-           as.single(wHx),
-           as.integer(wIErr),
-           DmRHx = as.single(wDmRHx))$DmRHx
+           as.integer(BDATBArtNr),
+           as.single(D1),
+           as.single(H1),
+           as.single(D2),
+           as.single(H2),
+           as.single(Hges),
+           as.single(Hx),
+           as.integer(IErr),
+           DmRHx = as.single(DmRHx))$DmRHx
       }
     )
   }
