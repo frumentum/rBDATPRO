@@ -3,13 +3,11 @@
 #' @description
 #' \code{loadBDAT} imports a dll file which contains a bunch of functions for
 #' modelling tree taper given diameters and height of a tree.
-#' @param path path to BDATPRO_R.dll which need to be installed on your computer
-#'  (use 32bit R version). See details.
 #' @param fun name of the function as character string(s) which shall be loaded
 #'  into global environment. See details.
 #' @details
-#' \code{path} default is \code{"C:/Program Files (x86)/BDATPRO/R/BDATPRO_R.dll"}
-#' which is the link to installed BDAT on your FVA computer. \cr
+#' Since this package contains the dll files compiled on Windows 32bit,
+#' \code{loadBDAT()} access them directly. \cr
 #' \code{fun} needs at least one of the following character strings to load a
 #' fortran function of BDAT in your global environment: \cr
 #' \itemize{
@@ -35,8 +33,6 @@
 #' loadBDAT(fun = 'BDATDORHX')
 #' @export
 
-# don't know how to call @useDynLib
-# @useDynLib '/dll/BDATPRO_R.dll'
 
 loadBDAT <- function(fun) {
 

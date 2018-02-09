@@ -9,9 +9,6 @@ loadBDAT(fun)
 \arguments{
 \item{fun}{name of the function as character string(s) which shall be loaded
 into global environment. See details.}
-
-\item{path}{path to BDATPRO_R.dll which need to be installed on your computer
-(use 32bit R version). See details.}
 }
 \value{
 Returns a fortran function and loads it into your global environment.
