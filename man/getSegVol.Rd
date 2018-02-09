@@ -39,5 +39,5 @@ of the segment. One can choose if bark should be included or excluded via
 the boolean parameter bark, which will include bark if it is set to TRUE.
 }
 \examples{
-getVolABmR(sp=1, d=30, h=40, A=10, B=20, bark = T)
+getSegVol(sp=1, d=30, h=40, bark = T)
 }

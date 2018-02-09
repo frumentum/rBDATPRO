@@ -26,7 +26,7 @@ getH <- function(
   H2 = 0
 ){
   # at first, use loadBDAT for loading fortran function in global.env
-  loadBDAT(fun = "BDATHXDX")
+  eval(loadBDAT(fun = "BDATHXDX"))
 
   dat <- data.frame(BDATArt = sp,
                     dbh = d,
@@ -47,7 +47,6 @@ getH <- function(
              Dx = dat$dx[a],
              IFeh = 0)[1] # IFeh is output variable
   })
-  # remove BDATHXDX before returning the result
-  rm(BDATHXDX, envir = .GlobalEnv)
+
   return(H)
 }

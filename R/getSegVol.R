@@ -18,7 +18,7 @@
 #' @param bark boolean, if TRUE volume including bark is calculated (default)
 #' @return volume with or without bark of given segment AB in cubic meter
 #' @examples
-#' getVolABmR(sp=1, d=30, h=40, A=10, B=20, bark = T)
+#' getSegVol(sp=1, d=30, h=40, bark = T)
 #' @export
 
 getSegVol <- function(
@@ -36,9 +36,12 @@ getSegVol <- function(
   bark = TRUE
 ){
   # at first load BDAT
-  if (isTRUE(bark)) {
-    loadBDAT(fun = "BDATVOLABMR")
-  } else loadBDAT(fun = "BDATVOLABOR")
+  if (isTRUE(bark))
+    eval(loadBDAT(fun = "BDATVOLABMR"))
+  else
+    eval(loadBDAT(fun = "BDATVOLABOR"))
+
+  # create input data.frame
   get_vol_dat <- data.frame(BDATArt = sp,
                             dbh = d,
                             h = h,
@@ -81,10 +84,6 @@ getSegVol <- function(
   vol <- ifelse(get_vol_dat$a == get_vol_dat$b, 0, vol)
   ## add indicator, whether calculated volume includes bark (=> TRUE)
   attr(vol, "bark") <- bark
-
-  # remove fortran function from global.env
-  if(isTRUE(bark)) rm(BDATVOLABMR, envir = .GlobalEnv) else
-    rm(BDATVOLABOR, envir = .GlobalEnv)
 
   return(vol)
 }
