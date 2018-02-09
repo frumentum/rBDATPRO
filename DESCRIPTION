@@ -4,13 +4,12 @@ Title: Imports functions of windows programm BDAT in R
 Version: 0.2.0
 Author: Simon Pöschl, Christian Vonderach
 Maintainer: Simon Pöschl <Simon.Poeschl@forst.bwl.de>
-Description: If the BDATPro-Programm is installed on your computer and you're 
-  using a 32bit R version, you can simply load the associated BDAT-dll and use the
-  BDAT-functions in R. Since BDAT is originally written in fortran, this package 
-  depends on the installation and availability of BDATPRO_R.dll and its import. 
-  Tests to directly include the Fortran-source code into the building of the 
-  package were unfortunately not successful, hence BDAT is still restricted to
-  windows. 
+Description: If you're running on a Windows 32bit system, you can simply load 
+  associated BDAT functions and subroutines within R wrapper functions, which
+  are pretty easy to use. Since BDAT is originally written in fortran, this 
+  package depends on a Windows 32bit OS, because tests to directly include the 
+  Fortran-source code into the building of the package were unfortunately not 
+  successful. Therefore BDAT is still restricted to windows. 
 License: GPL
 Encoding: UTF-8
 LazyData: true
