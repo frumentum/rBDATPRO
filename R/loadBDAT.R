@@ -286,7 +286,7 @@ loadBDAT <- function(fun, type = "expr") {
   if ("V_BDAT20" %in% fun) {
     expr <- expression(
       V_BDAT20 <- function(
-        wBDATBArtNr,
+        BDATBArtNr,
         D1,
         H1,
         D2,
@@ -304,7 +304,7 @@ loadBDAT <- function(fun, type = "expr") {
         NMaxFixLng
       )
       {
-        n = length(wBDATBArtNr)
+        n = length(BDATBArtNr)
         Skl = matrix(rep(1,n*6), ncol=6)
         Vol = matrix(rep(0,n*7), ncol=7)
         FixLng = matrix(rep(0,n*180), ncol=180)
@@ -312,7 +312,7 @@ loadBDAT <- function(fun, type = "expr") {
         iErr = rep(0,n)
         tmp = .C("R_V_BDAT20",
                  as.integer(n),
-                 as.integer(wBDATBArtNr),
+                 as.integer(BDATBArtNr),
                  as.single(D1),
                  as.single(H1),
                  as.single(D2),
