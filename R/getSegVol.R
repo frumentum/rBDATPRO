@@ -35,8 +35,6 @@ getSegVol <- function(
   D2 = 0,
   H2 = 0,
   SekLng = 0.1,
-  VolABmR = 0,
-  VolABoR = 0,
   bark = TRUE
 ){
   # at first load BDAT
@@ -54,7 +52,7 @@ getSegVol <- function(
                             H1 = H1,
                             D2 = D2,
                             H2 = H2,
-                            wSekLng = SekLng)
+                            SekLng = SekLng)
 
   if (isTRUE(bark)){
     vol <- sapply(1:nrow(get_vol_dat), function(a){
@@ -66,7 +64,7 @@ getSegVol <- function(
                   wHges = get_vol_dat$h[a],
                   wA = get_vol_dat$a[a],
                   wB = get_vol_dat$b[a],
-                  wSekLng = get_vol_dat$wSekLng[a],
+                  wSekLng = get_vol_dat$SekLng[a],
                   wIErr = 0, # because it's a fortran output variable
                   wVolABmR = 0)}) # fortran output variable
   } else {
@@ -79,7 +77,7 @@ getSegVol <- function(
                   wHges = get_vol_dat$h[a],
                   wA = get_vol_dat$a[a],
                   wB = get_vol_dat$b[a],
-                  wSekLng = get_vol_dat$wSekLng[a],
+                  wSekLng = get_vol_dat$SekLng[a],
                   wIErr = 0, # fortran output variable
                   wVolABoR = 0)}) # fortran output variable
   }
