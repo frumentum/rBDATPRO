@@ -2,6 +2,7 @@
 
 export(getDatHX)
 export(getDhVol)
+export(getDoubleBark)
 export(getH)
 export(getSegVol)
 export(loadBDAT)

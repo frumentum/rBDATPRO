@@ -14,6 +14,10 @@
 #' @param H2 measuring height of D2, default is 0
 #' @param SegLen segment length for calculating the volume
 #' @param bark boolean, if TRUE volume including bark is calculated (default)
+#' @details
+#' Strictly speaking \code{getDhVol} is a wrapper function. It loads the fortran
+#' subroutine \code{BDATVOLDHMR} or \code{BDATVOLDHOR} (depending on whether or
+#' not bark is set to TRUE or FALSE) within a call of \code{loadBDAT}.
 #' @return volume with or without bark of given segment AB in cubic meter
 #' @examples
 #' getDhVol(sp=1, d=30, h=40, bark = T)

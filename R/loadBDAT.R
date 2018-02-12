@@ -231,26 +231,24 @@ loadBDAT <- function(fun, type = "expr") {
   if ("BDATRINDE2HX" %in% fun) {
     expr <- expression(
       BDATRINDE2HX <- function(
-        wBDATBArtNr,
-        wD1,
-        wH1,
-        wD2,
-        wH2,
-        wHges,
-        wHx,
-        wIErr,
-        wRinde2Hx
+        BDATBArtNr,
+        D1,
+        H1,
+        D2,
+        H2,
+        Hges,
+        Hx
       ){
         .C("R_BDATRINDE2HX",
-           as.integer(wBDATBArtNr),
-           as.single(wD1),
-           as.single(wH1),
-           as.single(wD2),
-           as.single(wH2),
-           as.single(wHges),
-           as.single(wHx),
-           as.integer(wIErr),
-           Rinde2Hx = as.single(wRinde2Hx))$Rinde2Hx
+           as.integer(BDATBArtNr),
+           as.single(D1),
+           as.single(H1),
+           as.single(D2),
+           as.single(H2),
+           as.single(Hges),
+           as.single(Hx),
+           0,
+           Rinde2Hx = 0)$Rinde2Hx
       }
     )
   }

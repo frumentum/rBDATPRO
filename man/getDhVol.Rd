@@ -34,6 +34,11 @@ species, diameter and height. One can choose if bark should be included or
 excluded via the boolean parameter bark, which will include bark if it is set
 to TRUE.
 }
+\details{
+Strictly speaking \code{getDhVol} is a wrapper function. It loads the fortran
+subroutine \code{BDATVOLDHMR} or \code{BDATVOLDHOR} (depending on whether or
+not bark is set to TRUE or FALSE) within a call of \code{loadBDAT}.
+}
 \examples{
 getDhVol(sp=1, d=30, h=40, bark = T)
 }

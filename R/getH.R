@@ -11,6 +11,9 @@
 #' @param D2 diameter at second height \code{H2}; if \code{D2 = 0} (default)
 #' taper form from the first NFI ('Bundeswaldinventur I') is used
 #' @param H2 according to D2, default is 0
+#' @details
+#' Strictly speaking \code{getH} is a wrapper function. It loads the fortran
+#' subroutine \code{BDATHXDX} within a call of \code{loadBDAT}.
 #' @return height of diameter \code{dx}
 #' @examples
 #' getH(sp=1, d=30, h=40, dx=20)

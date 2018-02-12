@@ -31,6 +31,11 @@ diameter at height \code{hx}
 This function calculates the diameter of a given height inside
 for a given tree of dimensions (dbh, h).
 }
+\details{
+Strictly speaking \code{getDatHx} is a wrapper function. It loads the fortran
+subroutine \code{BDATDMRHX} or \code{BDATDORHX} (depending on whether or not
+bark is set to TRUE or FALSE) within a call of \code{loadBDAT}.
+}
 \examples{
 getDatHx(sp=1, d=30, h=40, hx=20)
 }

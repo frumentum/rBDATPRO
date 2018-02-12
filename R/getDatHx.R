@@ -12,6 +12,10 @@
 #' taper form from the first NFI ('Bundeswaldinventur I') is used
 #' @param H2 according to D2, default is 0
 #' @param bark boolean, if TRUE volume including bark is calculated (default)
+#' @details
+#' Strictly speaking \code{getDatHx} is a wrapper function. It loads the fortran
+#' subroutine \code{BDATDMRHX} or \code{BDATDORHX} (depending on whether or not
+#' bark is set to TRUE or FALSE) within a call of \code{loadBDAT}.
 #' @return diameter at height \code{hx}
 #' @examples
 #' getDatHx(sp=1, d=30, h=40, hx=20)
